@@ -4,7 +4,7 @@ import router from './router';
 
 const {
   NODE_ENV,
-  ANALYTICS_ID,
+  VUE_APP_ANALYTICS_ID,
 } = process.env;
 
 (() => {
@@ -12,13 +12,13 @@ const {
     return;
   }
 
-  if (!ANALYTICS_ID) {
+  if (!VUE_APP_ANALYTICS_ID) {
     return;
   }
 
   console.log('analytics loaded');
   Vue.use(VueAnalytics, {
-    id: ANALYTICS_ID,
+    id: VUE_APP_ANALYTICS_ID,
     router,
   });
 })();
