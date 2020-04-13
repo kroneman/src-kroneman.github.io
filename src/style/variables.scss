@@ -1,0 +1,79 @@
+@import "lib";
+
+///
+/// Responsive
+///
+$breakpoints: (
+  //xxxs: 375px,
+  //xxs: 425px,
+  //xs: 480px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  //xxl: 1440px,
+  //xxxl: 1920px
+);
+
+$max-widths: (
+  lg: 992px
+);
+
+$fonts-location: '~@assets/fonts/';
+$font-import: ( 
+  'hind_siliguri/hindsiliguri': (
+    regular: (weight: normal, style: normal)
+  ),
+  'josefin_slab/josefinslab': (
+    regular: (weight: normal, style: normal)
+  ),
+  'raleway/raleway': (
+    regular: (weight: normal, style: normal)
+  )
+);
+
+$font-family: (
+  primary: 'hind_siliguri/hindsiliguri', // body
+  secondary: 'raleway/raleway', // alt headings
+  tertiary: 'josephin_slab/josefinslab' // primary headings
+);
+
+$font-types: (
+    primary: (
+        default: (font-family: primary, font-size: 1em, line-height: normal, letter-spacing: normal)
+    ),
+    type-1: (font: 700 30px font-family(tertiary), letter-spacing: normal, line-height: normal),
+    type-2: (font: 700 28px font-family(tertiary), letter-spacing: normal, line-height: normal),
+    type-3: (font: 700 26px font-family(secondary), letter-spacing: normal, line-height: normal),
+    type-4: (font: 700 24px font-family(secondary), letter-spacing: -.5px, line-height: normal),
+    type-5: (font: 700 22px font-family(secondary), letter-spacing: normal, line-height: normal),
+    type-6: (font: 700 20px font-family(secondary), letter-spacing: normal, line-height: normal),
+    type-7: (font: 700 18px/1.5 font-family(primary), letter-spacing: normal),
+    type-8: (font: 400 16px/1.5 font-family(secondary), letter-spacing: normal),
+    type-9: (font: 400 14px/1.5 font-family(primary), letter-spacing: normal),
+    type-10: (font: 400 12px/1.5 font-family(secondary), letter-spacing: normal),
+    type-11: (font: 400 10px/1.5 font-family(primary), letter-spacing: normal),
+    type-12: (font: 400 8px/1.5 font-family(secondary), letter-spacing: normal),
+
+    // default body text
+    default: type-8,
+    small: type-10,
+
+    // default headings
+    title-h1: (default: type-2, tablet-landscape: type-1),
+    title-h2: (default: type-3, tablet-landscape: type-2),
+    title-h3: (default: type-4, tablet-landscape: type-3),
+    title-h4: (default: type-5, tablet-landscape: type-4),
+    title-h5: (default: type-6, tablet-landscape: type-5),
+    title-h6: (default: type-7, tablet-landscape: type-6),
+
+    header-title: (type: type-6, text-transform: none),
+);
+
+$colors: (
+  blue
+);
+
+$theme-colors: (
+
+)

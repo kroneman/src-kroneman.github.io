@@ -1,0 +1,155 @@
+$property-generation-config: (
+    color: (
+        property: 'color',
+        namespace: 'clr',
+        values: (
+            primary: green,
+            secondary: blue,
+            100: #111,
+            200: #222,
+            300: #333,
+            400: #444,
+            500: #555,
+        )
+    ),
+    background: (
+        property: 'background',
+        namespace: 'bg',
+        values: (
+            primary: green,
+            secondary: blue,
+            100: #111,
+            200: #222,
+            300: #333,
+            400: #444,
+            500: #555,
+        )
+    ),
+    order: (
+        property: 'order',
+        namespace: 'o',
+        values: (
+            0: 0,
+            1: 1,
+            2: 2,
+            3: 3,
+            4: 4,
+            5: 5,
+        )
+    ),
+    display: (
+        property: 'display',
+        namespace: 'd',
+        values: (
+            inline: inline,
+            block: block,
+            inline-block: inline-block,
+            flex: flex,
+            none: none,
+        )
+    ),
+    width: (
+        property: 'width',
+        namespace: 'w',
+        values: (
+            10: 10%,
+            20: 20%,
+            30: 30%,
+            40: 40%,
+            50: 50%,
+            60: 60%,
+            70: 70%,
+            80: 80%,
+            90: 90%,
+            100: 100%,
+        )
+    ),
+    // @todo logic to check if viewport is larger than value
+    'max-width': (
+        property: 'max-width',
+        namespace: 'mw',
+        values: (
+            lg: 992px
+        )
+    ),
+    'text-alignment': (
+        property: 'text-align',
+        namespace: 'text',
+        values: (
+            left: left,
+            center: center,
+            right: right
+        )
+    ),
+    'font-size': (
+        property: 'font-size',
+        namespace: 'fs',
+        values: (
+            10: 10px,
+            12: 12px,
+            14: 14px,
+            16: 16px,
+            18: 18px,
+            20: 20px,
+            22: 22px,
+            24: 24px,
+            26: 26px,
+            28: 28px,
+            30: 30px,
+            32: 32px,
+            34: 34px,
+            36: 36px,
+            38: 38px,
+            40: 40px,
+            42: 42px,
+            44: 44px,
+            46: 46px,
+            48: 48px,
+            50: 50px,
+            52: 52px,
+            54: 54px,
+            56: 56px,
+        )
+    )
+);
+
+$spacing-property-generation: (
+    margins: (
+        property: 'margin',
+        namespace: 'm',
+        values: (
+            0: 0,
+            1: 5px,
+            2: 10px,
+            3: 15px,
+            4: 20px,
+            5: 30px,
+            6: 40px,
+            auto: auto
+        )
+    ),
+    padding: (
+        property: 'padding',
+        namespace: 'p',
+        values: (
+            0: 0,
+            1: 5px,
+            2: 10px,
+            3: 15px,
+            4: 20px,
+            5: 30px,
+            6: 40px,
+            auto: auto
+        )
+    )
+);
+
+@each $spacing-id, $spacing-property-config in $spacing-property-generation {
+    @include generate-spacing-all-breakpoints($spacing-property-config...);
+}
+
+@each $property-id, $property-config in $property-generation-config {
+    @include generate-property-all-breakpoints($property-config...);
+}
+
+@include generate-grid-all-breakpoints($grid-config...);

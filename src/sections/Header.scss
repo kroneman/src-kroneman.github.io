@@ -1,0 +1,61 @@
+@import '~@/style/variables';
+
+$header-background-color: #777;
+$header-color-text: #fff;
+
+.header {
+    background: $header-background-color;
+    color: $header-color-text;
+    align-items: center;
+
+    &_title {
+        @include font-type(header-title);
+
+        &_link {
+            &, &:visited, &:active, &:focus {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+$header-social-list-color: currentColor;
+$header-social-list-hover-color: blue;
+
+.social {
+    &_list {
+        margin: 0;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        list-style-type: none;
+        padding: 0px;
+
+        &_item {
+            margin-right: 10px;
+
+            &:hover {
+                color: $header-social-list-hover-color;
+                cursor: pointer;
+                transition: color 200ms ease-in-out;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &_link {
+            &, &:active, &:visited, &:focus {
+                color: inherit;
+            }
+
+            &:hover {
+                color: $header-social-list-hover-color;
+                cursor: pointer;
+                transition: color 200ms ease-in-out;
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1em;
+    text-transform: uppercase;
+}
+
+h1 {
+    @include font-type(type-1);
+}
+
+h2 {
+    @include font-type(type-2);
+}
+
+h3 {
+    @include font-type(type-3);
+}
+
+h4 {
+    @include font-type(type-4);
+}
+
+h5 {
+    @include font-type(type-5);
+}
+
+h6 {
+    @include font-type(type-6);
+}

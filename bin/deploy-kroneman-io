@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+github_pages_repo=https://github.com/kroneman/kroneman.github.io.git
+deployent_directory=../kroneman.github.io
+local_build_folder=./dist
+
+declare -a local required_dirs=(
+    $deployent_directory
+    $local_build_folder
+);
+
+# checks if build folder exists and destination folder exists
+ensure_required_dirs() {
+    for dir in ${required_dirs[@]}; do
+        if [[ ! -d $dir ]]; then
+            echo "$dir does not exist"
+            exit 1;
+        fi
+    done
+}
+
+# Credit: Thanks David Walsh!
+# https://davidwalsh.name/detect-git-directory
+check_if_dir_is_git() {
+    if git rev-parse --git-dir > /dev/null 2>&1; then
+        git checkout master && git pull origin master
+    else
+        hg pull && hg checkout "last(public())"
+    fi
+}
+
+# check if the dest is the target github pages repo
+ensure_destination_folder_is_repo() {
+    # cd back to referenceDir when this is finished
+    declare local referenceDir=$(pwd);
+    cd $deployent_directory;
+    echo "Current Working in directory: $(pwd)";
+
+    check_if_dir_is_git;
+    declare local git_origin_url="$(git remote get-url origin)";
+    echo '$github_pages_repo'
+    echo $github_pages_repo
+    if [[ $git_origin_url = $github_pages_repo ]]; then
+        echo "is the right repository"
+    else
+        # todo: check if there are currently any files in here
+        # the chance that the $deployent_directory exists and is not a repo is slim
+        echo "is not the repository, cloning remote into current repo";
+        git clone $github_pages_repo .;
+    fi
+
+    cd $referenceDir;
+    echo "Current Working in directory: $(pwd)";
+}
+
+main() {
+    ensure_required_dirs;
+    ensure_destination_folder_is_repo;
+    cp -r $local_build_folder/* $deployent_directory;
+
+    cd $deployent_directory;
+    echo "Current Working in directory: $(pwd)";
+    
+    git add .;
+    git commit -m "Deployment: $(date)";
+    # credentials are managed via your keychain
+    # this script may need to be udpated if/when switching to ssh based auth
+    git push --set-upstream origin master;
+}
+
+main;

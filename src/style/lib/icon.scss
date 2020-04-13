@@ -1,0 +1,44 @@
+%icon {
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    transition: .2s ease 0s;
+    background: transparent no-repeat center center;
+    background-size: contain;
+}
+
+/**
+ * icon-media doesn't extend %icon sothat it can be used in media queries or responsive mixins
+ * Sass doesn't allow @extend within media queries
+ *
+ * Return a icon based on type and size.
+ * @param {string} $type The type of icon
+ * @param {number} $size The size of the icon
+ */
+@mixin icon-media($type: arrow, $size: null, $variant: null, $rotate: 0deg) {
+    @if $size {
+        width: $size;
+        height: $size;
+    }
+
+    @if $variant {
+        background-image: url('../images/#{$type}-#{$variant}.svg');
+    } @else {
+        background-image: url('../images/#{$type}.svg');
+    }
+
+    @if $rotate != 0 {
+        transform: rotate($rotate);
+    }
+}
+
+/**
+ * Return a icon based on type and size.
+ * @param {string} $type The type of icon
+ * @param {number} $size The size of the icon
+ */
+@mixin icon($type: arrow, $size: 15px, $variant: null, $rotate: 0deg) {
+    @extend %icon;
+
+    @include icon-media($type, $size, $variant, $rotate);
+}
