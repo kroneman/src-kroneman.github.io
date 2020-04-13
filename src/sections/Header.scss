@@ -10,6 +10,11 @@ $header-color-text: #fff;
 
     &_title {
         @include font-type(header-title);
+        text-align: center;
+
+        @include respond(md) {
+            text-align: left;
+        }
 
         &_link {
             &, &:visited, &:active, &:focus {

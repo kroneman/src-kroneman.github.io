@@ -1,14 +1,14 @@
 <template>
   <header class="header px-4">
     <div class="row align-items-center">
-      <div class="col-6 flex-grow">
+      <div class="col-12 col-md-6 flex-grow">
         <h1 class="p-0 m-0 py-2 header_title">
           <a href="/" class="header_title_link">
             {{title}}
           </a>
         </h1>
       </div>
-      <div class="col-6 d-flex flex-grow justify-content-right">
+      <div class="col-6 d-none d-md-flex flex-grow justify-content-right">
         <div class="social">
           <ul class="social_list">
             <li v-for="item in socialList"

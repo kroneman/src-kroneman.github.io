@@ -1,16 +1,16 @@
 <template>
-  <div class="home">
-    <div class="home-section row py-6 align-items-center" style="flex-wrap: wrap;">
+  <div class="home px-2 px-md-0">
+    <div class="home-section row py-md-6 align-items-center" style="flex-wrap: wrap;">
       <div class="col-12">
-        <h2 class="py-4">{{introText}}</h2>
+        <h2 class="pb-4 py-md-4">{{introText}}</h2>
         <div class="row justify-content-center">
-          <div class="col-4 px-4" v-for="introItem in introItems" :key="introItem.title">
+          <div class="col-12 col-md-4 px-4 pb-6" v-for="introItem in introItems" :key="introItem.title">
             <div class="card_image">
               <img v-if="introItem.image" :src="introItem.image" />
               <icon v-if="introItem.icon" :name="introItem.icon" />
             </div>
             <div class="card_text">
-              <h4>{{introItem.title}}</h4>
+              <h4 class="my-1">{{introItem.title}}</h4>
               <p class="fs-18">{{introItem.text}}</p>
               <a class="fs-18" :href="introItem.link">
                 <span v-if="introItem.linkText">
@@ -26,9 +26,9 @@
       </div>
     </div>
     <div class="home-section row align-items-center justify-content-center">
-      <div class="col-12 col-xl-6">
+      <div class="col-12 col-xl-6 py-6">
         <h2>About Me</h2>
-        <p class="fs-20" style="line-height: 2em">
+        <p class="fs-md-20" style="line-height: 2em">
           Having spent a significant amount of time in countries other my own
           has given me a unique perspective.
           I grew up in Indonesia, went to University in America,
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="home-section row align-items-center">
-      <div class="col-12">
+      <div class="col-12 py-6">
         <h2>Technologies</h2>
         <ul class="mx-auto d-inline-block text-center" style="list-style-type: none">
           <li>HTML - ~6 years</li>
@@ -79,20 +79,20 @@
         <h2 class="text-center">Experience</h2>
         <div class="row justify-content-center">
           <div>
-            <div class="p-4 text-left d-inline-block mx-auto">
+            <div class="py-4 p-md-4 text-left d-inline-block mx-auto">
               <p class="fs-30 text-center">2.5 Years</p>
-              <h3>Clockwork, Amsterdam</h3>
+              <h3 class="text-center">Clockwork, Amsterdam</h3>
             </div>
           </div>
           <div>
-            <div class="p-4 text-left d-inline-block mx-auto">
+            <div class="py-4 p-md-4 text-left d-inline-block mx-auto">
               <p class="fs-30 text-center">2.5 Years</p>
-              <h3>SuitSupply, Amsterdam</h3>
+              <h3 class="text-center">SuitSupply, Amsterdam</h3>
             </div>
           </div>
         </div>
         <p>{{experienceProjectsText}}</p>
-        <ul class="mx-auto d-inline-block text-center py-4" style="list-style-type: none">
+        <ul class="mx-auto d-inline-block text-center py-4 px-0" style="list-style-type: none">
           <li v-for="project in experienceProjects" :key="project.text">
             <a :href="project.link">
               {{project.text}}
@@ -106,25 +106,25 @@
       <div class="col-12">
         <h2>Get in touch</h2>
         <ul
-          class="mx-auto row justify-content-center align-items-center text-left py-4 d-flex"
+          class="px-0 mx-auto row-md justify-content-center align-items-center text-center text-md-left py-4"
           style="list-style-type: none"
         >
-          <li class="px-4">
+          <li class="pt-2 pt-md-0 px-md-4">
             <a href="mailto:a.l.kroneman@gmail.com?subject=kroneman.io">
               Send an email
             </a>
           </li>
-          <li class="px-4">
+          <li class="pt-2 pt-md-0 px-md-4">
             <a href="https://www.linkedin.com/in/kroneman/">
               Connect on Linkedin
             </a>
           </li>
-          <li class="px-4">
+          <li class="pt-2 pt-md-0 px-md-4">
             <a href="https://stackoverflow.com/users/6598680/lkroneman">
               Send a message on StackOverflow
             </a>
           </li>
-          <li class="px-4 text-center">
+          <li class="pt-2 pt-md-0 px-md-4 text-md-center">
             <a href="https://github.com/kroneman">
                Follow me / give feedback on Github
             </a>
@@ -206,6 +206,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~@/style/variables';
 .home-section {
   min-height: calc(100vh - 60px);
 }
@@ -222,7 +223,9 @@ export default {
   }
 
   &_text {
-    padding: 15px;
+    @include respond(md) {
+      padding: 15px;
+    }
   }
 }
 </style>
