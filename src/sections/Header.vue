@@ -16,7 +16,7 @@
                 class="social_list_item py-2"
             >
               <a :href="item.link" class="social_list_link">
-                <icon :name="item.icon" />
+                <icon :name="item.icon" style="max-width: 34px" />
               </a>
             </li>
           </ul>

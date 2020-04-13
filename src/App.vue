@@ -16,6 +16,9 @@ import Header from '@/sections/Header.vue';
 
 export default {
   components: { Header },
+  mounted() {
+    console.log(this.$ga);
+  },
 };
 </script>
 
