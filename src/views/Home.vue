@@ -91,7 +91,7 @@
             </div>
           </div>
         </div>
-        <p>I've maintained / contributed to / released iterations of the following sites</p>
+        <p>{{experienceProjectsText}}</p>
         <ul class="mx-auto d-inline-block text-center py-4" style="list-style-type: none">
           <li v-for="project in experienceProjects" :key="project.text">
             <a :href="project.link">
@@ -110,6 +110,11 @@
           style="list-style-type: none"
         >
           <li class="px-4">
+            <a href="mailto:a.l.kroneman@gmail.com?subject=kroneman.io">
+              Send an email
+            </a>
+          </li>
+          <li class="px-4">
             <a href="https://www.linkedin.com/in/kroneman/">
               Connect on Linkedin
             </a>
@@ -120,10 +125,8 @@
             </a>
           </li>
           <li class="px-4 text-center">
-            <div>Follow me</div>
-            <div>Or create an issue on a repository</div>
             <a href="https://github.com/kroneman">
-               on Github
+               Follow me / give feedback on Github
             </a>
           </li>
         </ul>
@@ -133,15 +136,11 @@
 </template>
 
 <script>
-// import Card from '@/components/Intro-card.vue';
-// import Experience from '@/sections/Experience.vue';
 import Icon from '@/components/icon.vue';
 
 export default {
   name: 'Home',
   components: {
-    // Card,
-    // Experience,
     Icon,
   },
   data() {
@@ -166,6 +165,7 @@ export default {
           linkExternal: true,
         },
       ],
+      experienceProjectsText: 'I\'ve maintained / contributed to / released iterations of the following sites',
       experienceProjects: [
         {
           link: 'https://suitsupply.com',

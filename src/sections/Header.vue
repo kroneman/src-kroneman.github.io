@@ -38,12 +38,16 @@ export default {
       title: '@kroneman',
       socialList: [
         {
-          icon: 'linkedin',
-          link: 'https://www.linkedin.com/in/kroneman/',
-        },
-        {
           icon: 'stackoverflow',
           link: 'https://stackoverflow.com/users/6598680/lkroneman',
+        },
+        {
+          icon: 'gmail',
+          link: 'mailto:a.l.kroneman@gmail.com?subject=kroneman.io',
+        },
+        {
+          icon: 'linkedin',
+          link: 'https://www.linkedin.com/in/kroneman/',
         },
         {
           icon: 'github',
