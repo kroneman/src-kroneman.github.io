@@ -41,7 +41,7 @@
     <div class="home-section row align-items-center">
       <div class="col-12 py-6">
         <h2>Technologies</h2>
-        <ul class="mx-auto d-inline-block text-center" style="list-style-type: none">
+        <ul class="mx-auto d-inline-block text-center px-0" style="list-style-type: none">
           <li>HTML - ~6 years</li>
           <li>CSS - 6+ years</li>
           <li>Javascript - ~6 years</li>
