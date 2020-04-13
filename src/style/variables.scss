@@ -1,24 +1,22 @@
 @import "lib";
 
-///
-/// Responsive
-///
+// ============
+// Responsive / Layout
+// ============
 $breakpoints: (
-  //xxxs: 375px,
-  //xxs: 425px,
-  //xs: 480px,
   sm: 576px,
   md: 768px,
   lg: 992px,
   xl: 1200px,
-  //xxl: 1440px,
-  //xxxl: 1920px
 );
 
 $max-widths: (
   lg: 992px
 );
 
+// ============
+// Typography
+// ============
 $fonts-location: '~@assets/fonts/';
 $font-import: ( 
   'hind_siliguri/hindsiliguri': (
@@ -70,10 +68,20 @@ $font-types: (
     header-title: (type: type-6, text-transform: none),
 );
 
+// ============
+// Colors
+// ============
+
+// Usage: color(default), color(background);
 $colors: (
-  blue
+  default: #444,  // text
+  background: #fff, // page background
 );
 
+// Usage: theme-color(primary)
 $theme-colors: (
+  primary: #ff7433, 
 
-)
+  header-background: color(default),
+  default-text-color: color(default)
+);

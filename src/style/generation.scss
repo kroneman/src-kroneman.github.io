@@ -2,28 +2,17 @@ $property-generation-config: (
     color: (
         property: 'color',
         namespace: 'clr',
-        values: (
-            primary: green,
-            secondary: blue,
-            100: #111,
-            200: #222,
-            300: #333,
-            400: #444,
-            500: #555,
-        )
+        values: $colors
+    ),
+    'theme-color': (
+        property: 'color',
+        namespace: 'theme-clr',
+        values: $theme-colors
     ),
     background: (
         property: 'background',
         namespace: 'bg',
-        values: (
-            primary: green,
-            secondary: blue,
-            100: #111,
-            200: #222,
-            300: #333,
-            400: #444,
-            500: #555,
-        )
+        values: $theme-colors
     ),
     order: (
         property: 'order',

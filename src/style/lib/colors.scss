@@ -1,0 +1,25 @@
+$colors: () !default;
+$theme-colors: () !default;
+
+/// @param {*} $key color from theme-colors map
+/// @returns {string} color value from $colors map
+@function color($key) {
+    @if map-has-key($map: $colors, $key: $key) {
+        @return map-get($map: $colors, $key: $key);
+    } @else {
+        @warn '@function color, key does not exist #{$key} in colors';
+        @return #000;
+    }
+}
+
+/// @param {*} $key from $theme-colors map
+/// @returns {string} color to be assigned
+@function theme-color($key) {
+    @if map-has-key($map: $theme-colors, $key: $key) {
+        @return map-get($map: $theme-colors, $key: $key);
+    } @else {
+        @warn '@function theme-color, key does not exist #{$key} in $theme-colors';
+        @return #000;
+    }
+}
+

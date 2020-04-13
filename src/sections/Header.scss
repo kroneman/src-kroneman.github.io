@@ -1,6 +1,6 @@
 @import '~@/style/variables';
 
-$header-background-color: #777;
+$header-background-color: theme-color(header-background) !default;
 $header-color-text: #fff;
 
 .header {
@@ -20,8 +20,8 @@ $header-color-text: #fff;
     }
 }
 
-$header-social-list-color: currentColor;
-$header-social-list-hover-color: blue;
+$header-social-list-color: currentColor !default;
+$header-social-list-hover-color: theme-color(primary) !default;
 
 .social {
     &_list {

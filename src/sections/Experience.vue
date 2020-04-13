@@ -22,7 +22,11 @@
             <li>Mentored junior developers</li>
             <li>Prepared user stories for tickets on an upcoming project</li>
             <li>Reviewed merge requests</li>
-            <li>Development Tools, Methodologies &amp; Environments: Commerce Cloud (Salesforce), JQuery, XML, Grunt, SASS, CSS, Gitlab, Confluence, Jira, Bitbucket</li>
+            <li>
+              Development Tools, Methodologies &amp; Environments:
+              Commerce Cloud (Salesforce), JQuery, XML, Grunt, SASS,
+              CSS, Gitlab, Confluence, Jira, Bitbucket
+            </li>
             <li>Released: www.omoda.nl, www.ladress.com</li>
           </ul>
 
@@ -37,7 +41,12 @@
             <li>Trained and onboarded new hires to the project</li>
             <li>Implemented webpack as a build tool</li>
             <li>Wrote tests for components built in React</li>
-            <li>Development Tools, Methodologies &amp; Environments: Docker, React, Redux, Vue.js, Angular JS, Typescript, Websockets, Webpack, Jest, Github, Stories On Board, Trello</li>
+            <li>
+              Development Tools, Methodologies &amp;
+              Environments: Docker, React, Redux, Vue.js,
+              Angular JS, Typescript, Websockets, Webpack,
+              Jest, Github, Stories On Board, Trello
+            </li>
           </ul>
         </div>
 
@@ -49,7 +58,12 @@
             <li>Rewrote components from jQuery to vanilla javascript</li>
             <li>Developed a tool to compare Commerce Cloud preferences between environments</li>
             <li>Consulted with senior developers to improve code</li>
-            <li>Development Tools, Methodologies &amp; Environments: Vanilla Js, jQuery, Grunt, Npm, Commerce Cloud (Demandware), React Js, Hapi Js, Jira, Confluence, Bamboo</li>
+            <li>
+              Development Tools, Methodologies
+              &amp; Environments: Vanilla Js, jQuery, Grunt,
+              Npm, Commerce Cloud (Demandware), React Js, Hapi Js,
+              Jira, Confluence, Bamboo
+            </li>
             <li>Maintained and Iterated On: www.suitsupply.com</li>
             <li>Released: www.suistudio.com</li>
           </ul>
