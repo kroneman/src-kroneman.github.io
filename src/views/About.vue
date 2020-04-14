@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>Lets build a map</h1>
-    <animation-map />
+    <animation-map :animated-map="true" />
   </div>
 </template>
 

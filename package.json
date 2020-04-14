@@ -24,7 +24,7 @@
     "vuex": "^3.1.3"
   },
   "devDependencies": {
-    "geojson-to-svg": "git://github.com/kroneman/geojson2svg.git#add-attributes",
+    "geojson-to-svg": "git://github.com/kroneman/geojson2svg.git#src-kroneman.io",
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
     "@vue/cli-plugin-router": "~4.3.0",

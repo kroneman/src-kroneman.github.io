@@ -8,6 +8,8 @@ export default {
     animationListeners: [],
     animationIndex: 0,
     animationClass: '',
+    viewBox: null,
+    itemsToAnimate: null,
     events: {
       start: 'AnimationStart',
       iteration: 'AnimationIteration',
@@ -21,31 +23,48 @@ export default {
 
     this.fillColor = '#0e2c38';
     this.$el.classList.add('animated-map');
+    this.viewBox = this.getViewBox();
+    this.itemsToAnimate = this.$el.querySelectorAll('.flight-route');
     this.animationClass = 'svg-path-animation--start';
-    const itemsToAnimate = Object.keys(this.pathElsById);
-    this.animatepathsSequentially(itemsToAnimate);
+
+    if (!this.itemsToAnimate) {
+      return;
+    }
+
+    this.animatepathsSequentially(this.itemsToAnimate);
   },
   methods: {
+    getViewBox() {
+      const svgEl = this.$el.querySelector('svg');
+      const viewBoxAttribute = svgEl.getAttribute('viewBox');
+      const mapSquaredArea = viewBoxAttribute.split(' ')
+        .map((n) => parseInt(n, 10))
+        // eslint-disable-next-line no-return-assign,no-param-reassign
+        .reduce((result, current) => result += Math.abs(current), 0);
+      this.scaleFactor = Math.floor(mapSquaredArea / 200);
+      this.circleScaleFactor = Math.floor(this.scaleFactor * 0.66);
+    },
     animatepathsSequentially(pathsToAnimate) {
       if (this.animationIndex >= pathsToAnimate.length) {
         return;
       }
 
-      const idToAnimate = pathsToAnimate[this.animationIndex];
-      const animatedPath = this.pathElsById[idToAnimate];
-      const pathLength = animatedPath.getTotalLength();
-      animatedPath.classList.add(this.animationClass);
-      animatedPath.setAttribute('style', `stroke-dasharray: ${pathLength}; stroke-dashoffset: ${pathLength};`);
-      this.animationListener(animatedPath, () => {
-        this.transitionFillPaths([idToAnimate]);
+      const currentPath = pathsToAnimate[this.animationIndex];
+      const pathLength = currentPath.getTotalLength();
+
+      currentPath.classList.add(this.animationClass);
+      currentPath.setAttribute(
+        'style',
+        `
+          stroke-dasharray: ${pathLength};
+          stroke-dashoffset: ${pathLength};
+        `,
+      );
+
+      this.animationListener(currentPath, () => {
+        debugger;
         this.animationIndex += 1;
         this.animatepathsSequentially(pathsToAnimate);
-      });
-    },
-    transitionFillPaths(pathsToFill) {
-      pathsToFill.map((pathId) => {
-        this.pathElsById[pathId].style.fill = this.fillColor;
-        return pathId;
       });
     },
     prefixEvent(element, eventType, eventHandler) {

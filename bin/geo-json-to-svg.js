@@ -8,39 +8,47 @@ const fse = require('fs-extra');
 const geojson2svg = require('geojson-to-svg');
 const proj4 = require('proj4');
 const EPSG3857 = require('epsg-index/s/3857.json');
-
+const turf = require('@turf/turf');
+const has = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
 
 const OUTPUT_PATH = path.resolve(__dirname, '../src/components/map/');
 const VUE_TEMPLATE = path.resolve(OUTPUT_PATH, './map.template.vue');
 const OUTPUT_FILE = path.join(OUTPUT_PATH, './map.generated.vue');
 
 const dataset = require('../data/mapboxdataset.json');
-
-
 const styles = {
   Point: {
-    fill: 'transparent',
-    color: '#fff',
-    opacity: 0.7,
-    stroke: '#fff',
-    weight: 0.5,
+    fill: '#ff7433',
+    opacity: 1,
+    stroke: 'none',
+    radius: 15000
   },
   Polygon: {
-    color: '#fff',
-    weight: 1,
-    opacity: 0.7,
+    fill: 'transparent',
+    opacity: .3,
+    stroke: '#777',
+    weight: 1500
   },
+  LineString: {
+    color: 'red',
+    opacity: 1,
+    fill: 'transparent',
+    stroke: 'red',
+    weight: 15000
+  }
 };
 styles.MultiPolygon = styles.Polygon;
 
 main();
+
 async function main() {
-  const combinedData = dataset;
+  const filteredData = filterLineStrings(dataset);
+  const combinedData = addGreatCircleRoutes(filteredData);
   const flipVertical = ([lat, long]) => {
     const isPositive = long > 0;
     const newlong = isPositive ? 0 - Math.abs(long) : Math.abs(long);
-    const scaleLat = lat * 10;
-    const scaleLong = newlong * 10;
+    const scaleLat = lat / 10;
+    const scaleLong = newlong / 10;
     return [
       scaleLat,
       scaleLong,
@@ -73,4 +81,80 @@ async function main() {
     // eslint-disable-next-line no-console
     console.error(e);
   }
+}
+
+/**
+ * Filters out line strings from dataset.
+ * @param {Object} dataset from mapbox
+ * @returns {Object} dataset with filtered features
+ */
+function filterLineStrings(dataset) {
+  const { features } = dataset;
+  const withoutLineStrings = features.filter(
+    feature => ['LineString'].every(
+      type => type !== feature.geometry.type
+    )
+  );
+
+  return {
+    ...dataset,
+    features: withoutLineStrings
+  };
+}
+
+/**
+ * @param {Object} dataset
+ * @returns {Object}
+ */
+function addGreatCircleRoutes(dataset) {
+  const { features } = dataset;
+  const points = features.filter(feature => has(feature.properties, 'lennart'));
+  const sortedPoints = sortByProperty(points, 'lennart');
+  const greatCircleRoutes = sortedPoints.map((item, index, arr) => {
+    if(index === arr.length - 1) {
+      return null;
+    }
+
+    const current = item;
+    const next = arr[index + 1];
+    const turfCurrent = turf.point(current.geometry.coordinates);
+    const turfNext = turf.point(next.geometry.coordinates);
+
+    // https://turfjs.org/docs/#greatCircle
+    const route = turf.greatCircle(turfCurrent, turfNext, {
+      'name': 'flight-route',
+      properties: {
+        className: 'flight-route'
+      },
+      offset: 40
+    });
+    return route;
+  }).filter(lineString => lineString !== null);
+
+  return {
+    ...dataset,
+    features: [
+      ...dataset.features,
+      ...greatCircleRoutes
+    ]
+  };
+}
+
+/**
+ * @param {array} arr of obj to sort
+ * @param {string} property to sort arr of objects by
+ * @returns {array} sorted
+ */
+function sortByProperty(arr, property) {
+  return arr.sort((a, b) => {
+    if(a.properties[property] < b.properties[property]) {
+      return -1;
+    }
+
+    if(a.properties[property] === b.properties[property]) {
+      return 0;
+    }
+
+    return 1;
+  });
 }

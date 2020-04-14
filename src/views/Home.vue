@@ -25,7 +25,8 @@
         </div>
       </div>
     </div>
-    <div class="home-section row align-items-center justify-content-center">
+    <div class="home-section home-section--about row align-items-center justify-content-center">
+      <animation-map class="home-section_map" :animated-map="true" />
       <div class="col-12 col-xl-6 py-6">
         <h2>{{aboutHeader}}</h2>
         <p v-for="paragraph in aboutParagraphs" :key="paragraph" class="fs-md-20" style="line-height: 2em">
@@ -88,12 +89,14 @@
 <script>
 import Icon from '@/components/icon.vue';
 import linkCustom from '@/components/link-custom/link-custom.vue';
+import animationMap from '@/components/map/map.generated.vue';
 
 export default {
   name: 'Home',
   components: {
     Icon,
     linkCustom,
+    animationMap,
   },
   data() {
     return {

@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import mapFunctionalityMixin from './map.withFunctionality';
 import animationMixin from './map.withStrokeAnimations';
 
 export default {
@@ -14,7 +13,6 @@ export default {
   // lifecycle events can be the same but be careful with methods that have the same name
   // only the last mixin in the array's methods will be used if there are name overlaps
   mixins: [
-    mapFunctionalityMixin,
     animationMixin,
   ],
   props: {
