@@ -16,7 +16,6 @@ const {
     return;
   }
 
-  console.log('analytics loaded');
   Vue.use(VueAnalytics, {
     id: VUE_APP_ANALYTICS_ID,
     router,

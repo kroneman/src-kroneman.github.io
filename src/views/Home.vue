@@ -12,14 +12,14 @@
             <div class="card_text">
               <h4 class="my-1">{{introItem.title}}</h4>
               <p class="fs-18">{{introItem.text}}</p>
-              <a class="fs-18" :href="introItem.link">
+              <link-custom class="fs-18" :href="introItem.link" :external="introItem.linkExternal">
                 <span v-if="introItem.linkText">
                   {{introItem.linkText}}
                 </span>
                 <span v-else>
                   {{introItem.link}}
                 </span>
-              </a>
+              </link-custom>
             </div>
           </div>
         </div>
@@ -27,67 +27,30 @@
     </div>
     <div class="home-section row align-items-center justify-content-center">
       <div class="col-12 col-xl-6 py-6">
-        <h2>About Me</h2>
-        <p class="fs-md-20" style="line-height: 2em">
-          Having spent a significant amount of time in countries other my own
-          has given me a unique perspective.
-          I grew up in Indonesia, went to University in America,
-          and lived in the Netherlands for five years.
-          This perspective has allowed me to look outside of the box
-          and approach problems with flexibility and with patience.
+        <h2>{{aboutHeader}}</h2>
+        <p v-for="paragraph in aboutParagraphs" :key="paragraph" class="fs-md-20" style="line-height: 2em">
+          {{paragraph}}
         </p>
       </div>
     </div>
     <div class="home-section row align-items-center">
       <div class="col-12 py-6">
-        <h2>Technologies</h2>
+        <h2>{{technologiesHeader}}</h2>
         <ul class="mx-auto d-inline-block text-center px-0" style="list-style-type: none">
-          <li>HTML - ~6 years</li>
-          <li>CSS - 6+ years</li>
-          <li>Javascript - ~6 years</li>
-          <li>Typescript - ~1 year</li>
-          <li>Node Js - 4 years</li>
-          <li>Linux - ~4 years</li>
-          <li>Mac - ~4 years</li>
-          <li>Windows - ~1 Year</li>
-
-          <li>Webpack - 3 years</li>
-          <li>Grunt - 1 year</li>
-          <li>Gulp - 6 months</li>
-
-          <li>SASS - 6 years</li>
-          <li>LESS - 1 year</li>
-          <li>Bootstrap &amp; Variations - 3 Years</li>
-          <li>React - 1 year, 6 months</li>
-          <li>Redux - 1 year</li>
-          <li>Angular Js (1.5.x) - 6 months</li>
-          <li>Vue Js - 1 Year</li>
-
-          <li>Express Js - 1 year</li>
-          <li>Hapi Js - 6 months</li>
-          <li>Jest - 6 months</li>
-          <li>Mocha - 3 months</li>
-          <li>Docker - 1 year</li>
-          <li>Nginx - 4 months</li>
-          <li>Bash - 2 Years</li>
-          <li>Websockets - 8 months</li>
+          <li v-for="tech in technologiesList" :key="tech">
+            {{tech}}
+          </li>
         </ul>
       </div>
     </div>
     <div class="home-section row align-items-center">
       <div class="col-12 text-center">
-        <h2 class="text-center">Experience</h2>
+        <h2 class="text-center">{{experienceHeader}}</h2>
         <div class="row justify-content-center">
-          <div>
+          <div v-for="company in experienceCompanies" :key="company.titleLocation">
             <div class="py-4 p-md-4 text-left d-inline-block mx-auto">
-              <p class="fs-30 text-center">2.5 Years</p>
-              <h3 class="text-center">Clockwork, Amsterdam</h3>
-            </div>
-          </div>
-          <div>
-            <div class="py-4 p-md-4 text-left d-inline-block mx-auto">
-              <p class="fs-30 text-center">2.5 Years</p>
-              <h3 class="text-center">SuitSupply, Amsterdam</h3>
+              <p class="fs-30 text-center">{{company.duration}}</p>
+              <h3 class="text-center">{{company.titleLocation}}</h3>
             </div>
           </div>
         </div>
@@ -99,35 +62,19 @@
             </a>
           </li>
         </ul>
-        <!-- <experience /> -->
       </div>
     </div>
     <div class="home-section row align-items-center justify-content-center">
       <div class="col-12">
-        <h2>Get in touch</h2>
+        <h2>{{connectHeader}}</h2>
         <ul
           class="px-0 mx-auto row-md justify-content-center align-items-center text-center text-md-left py-4"
           style="list-style-type: none"
         >
-          <li class="pt-2 pt-md-0 px-md-4">
-            <a href="mailto:a.l.kroneman@gmail.com?subject=kroneman.io">
-              Send an email
-            </a>
-          </li>
-          <li class="pt-2 pt-md-0 px-md-4">
-            <a href="https://www.linkedin.com/in/kroneman/">
-              Connect on Linkedin
-            </a>
-          </li>
-          <li class="pt-2 pt-md-0 px-md-4">
-            <a href="https://stackoverflow.com/users/6598680/lkroneman">
-              Send a message on StackOverflow
-            </a>
-          </li>
-          <li class="pt-2 pt-md-0 px-md-4 text-md-center">
-            <a href="https://github.com/kroneman">
-               Follow me / give feedback on Github
-            </a>
+          <li v-for="linkItem in connectLinks" :key="linkItem.text" class="pt-2 pt-md-0 px-md-4 text-md-center">
+            <link-custom :href="linkItem.link" :external="linkItem.external" :email="linkItem.email">
+               {{linkItem.text}}
+            </link-custom>
           </li>
         </ul>
       </div>
@@ -137,11 +84,13 @@
 
 <script>
 import Icon from '@/components/icon.vue';
+import linkCustom from '@/components/link-custom/link-custom.vue';
 
 export default {
   name: 'Home',
   components: {
     Icon,
+    linkCustom,
   },
   data() {
     return {
@@ -163,6 +112,58 @@ export default {
           link: 'https://github.com/kroneman/google-apps-script--app-localization',
           linkText: 'View Repository',
           linkExternal: true,
+        },
+      ],
+      aboutHeader: 'About Me',
+      aboutParagraphs: [
+        `Having spent a significant amount of time in countries other my own
+        has given me a unique perspective.
+        I grew up in Indonesia, went to University in America,
+        and lived in the Netherlands for five years.
+        This perspective has allowed me to look outside of the box
+        and approach problems with flexibility and with patience.`,
+      ],
+      technologiesHeader: 'Technologies',
+      technologiesList: [
+        'HTML - ~6 years',
+        'CSS - 6+ years',
+        'Javascript - ~6 years',
+        'Typescript - ~1 year',
+        'Node Js - 4 years',
+        'Linux - ~4 years',
+        'Mac - ~4 years',
+        'Windows - ~1 Year',
+
+        'Webpack - 3 years',
+        'Grunt - 1 year',
+        'Gulp - 6 months',
+
+        'SASS - 6 years',
+        'LESS - 1 year',
+        'Bootstrap &amp; Variations - 3 Years',
+        'React - 1 year, 6 months',
+        'Redux - 1 year',
+        'Angular Js (1.5.x) - 6 months',
+        'Vue Js - 1 Year',
+
+        'Express Js - 1 year',
+        'Hapi Js - 6 months',
+        'Jest - 6 months',
+        'Mocha - 3 months',
+        'Docker - 1 year',
+        'Nginx - 4 months',
+        'Bash - 2 Years',
+        'Websockets - 8 months',
+      ],
+      experienceHeader: 'Experience',
+      experienceCompanies: [
+        {
+          titleLocation: 'Clockwork, Amsterdam',
+          duration: '2.5 Years',
+        },
+        {
+          titleLocation: 'Suitsupply, Amsterdam',
+          duration: '2.5 Years',
         },
       ],
       experienceProjectsText: 'I\'ve maintained / contributed to / released iterations of the following sites',
@@ -198,6 +199,30 @@ export default {
         {
           link: 'https://www.fuelforfans.com/',
           text: 'fuelforfans.com',
+        },
+      ],
+      connectHeader: 'Get in touch',
+      connectLinks: [
+        {
+          link: 'mailto:a.l.kroneman@gmail.com?subject=kroneman.io',
+          text: 'Send an email',
+          external: false,
+          email: true,
+        },
+        {
+          link: 'https://www.linkedin.com/in/kroneman/',
+          text: 'Connect on Linkedin',
+          external: true,
+        },
+        {
+          link: 'https://stackoverflow.com/users/6598680/lkroneman',
+          text: 'Send a message on StackOverflow',
+          external: true,
+        },
+        {
+          link: 'https://github.com/kroneman',
+          text: 'Follow me / give feedback on Github',
+          external: true,
         },
       ],
     };
