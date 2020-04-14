@@ -6,16 +6,25 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "download-map-data-set": "./bin/download-map-data-set.js",
+    "build-svg-map": "./bin/geo-json-to-svg.js",
     "deploy": "npm run build && ./bin/deploy-kroneman-io"
   },
   "dependencies": {
+    "@turf/turf": "^5.1.6",
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "dotenv": "^8.2.0",
+    "epsg-index": "^1.0.0",
+    "fs-extra": "^9.0.0",
+    "proj4": "^2.6.1",
     "vue": "^2.6.11",
     "vue-analytics": "^5.22.1",
     "vue-router": "^3.1.6",
     "vuex": "^3.1.3"
   },
   "devDependencies": {
+    "geojson-to-svg": "git://github.com/kroneman/geojson2svg.git#add-attributes",
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
     "@vue/cli-plugin-router": "~4.3.0",
