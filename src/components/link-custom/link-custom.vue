@@ -19,13 +19,15 @@ export default {
     external: { type: Boolean, default: false },
     email: { type: Boolean, default: false },
     href: { type: String, required: true },
+    eventCategory: { type: String, default: 'linkCustom' },
+    eventAction: { type: String, default: 'navigate' },
   },
   methods: {
     trackLink() {
       if (this.$ga) {
         this.$ga.event({
-          eventCategory: 'linkCustom',
-          eventAction: 'navigate',
+          eventCategory: this.eventCategory,
+          eventAction: this.eventAction,
           eventLabel: this.href,
         });
       }

@@ -56,10 +56,13 @@
         </div>
         <p>{{experienceProjectsText}}</p>
         <ul class="mx-auto d-inline-block text-center py-4 px-0" style="list-style-type: none">
-          <li v-for="project in experienceProjects" :key="project.text">
-            <a :href="project.link">
+          <li
+            v-for="project in experienceProjects" :key="project.text"
+            class="pt-md-1"
+          >
+            <link-custom :href="project.link" :external="true">
               {{project.text}}
-            </a>
+            </link-custom>
           </li>
         </ul>
       </div>
@@ -231,26 +234,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/style/variables';
-.home-section {
-  min-height: calc(100vh - 60px);
-}
-
-.card {
-  &_image {
-    height: 200px;
-    width: 100%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  &_text {
-    @include respond(md) {
-      padding: 15px;
-    }
-  }
-}
+@import './Home.scss';
 </style>
