@@ -1,9 +1,9 @@
 <template>
-  <span>
-    <a v-if="external" :href="href" target="_blank">
+  <span class="link-custom">
+    <a v-if="external" :href="href" @click="trackLink" target="_blank">
       <slot />
     </a>
-    <a v-else-if="email" :href="href">
+    <a v-else-if="email" :href="href" @click="trackLink">
       <slot />
     </a>
     <router-link v-else :to="href">
@@ -20,9 +20,20 @@ export default {
     email: { type: Boolean, default: false },
     href: { type: String, required: true },
   },
+  methods: {
+    trackLink() {
+      if (this.$ga) {
+        this.$ga.event({
+          eventCategory: 'linkCustom',
+          eventAction: 'navigate',
+          eventLabel: this.href,
+        });
+      }
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-@import '@/style/variables';
+@import './link-custom.scss';
 </style>

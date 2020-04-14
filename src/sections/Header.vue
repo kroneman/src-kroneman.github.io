@@ -15,9 +15,9 @@
                 :key="item.icon"
                 class="social_list_item py-2"
             >
-              <a :href="item.link" class="social_list_link">
+              <link-custom :href="item.link" :external="true" class="social_list_link">
                 <icon :name="item.icon" style="max-width: 34px" />
-              </a>
+              </link-custom>
             </li>
           </ul>
         </div>
@@ -28,10 +28,12 @@
 
 <script>
 import Icon from '@/components/icon.vue';
+import linkCustom from '@/components/link-custom/link-custom.vue';
 
 export default {
   components: {
     Icon,
+    linkCustom,
   },
   data() {
     return {
