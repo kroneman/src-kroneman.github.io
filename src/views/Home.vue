@@ -60,7 +60,7 @@
             v-for="project in experienceProjects" :key="project.text"
             class="pt-md-1"
           >
-            <link-custom :href="project.link" :external="true">
+            <link-custom :href="project.link" :external="true" eventAction="experienceProject">
               {{project.text}}
             </link-custom>
           </li>
