@@ -146,7 +146,7 @@ export default {
 
         'SASS - 6 years',
         'LESS - 1 year',
-        'Bootstrap &amp; Variations - 3 Years',
+        'Bootstrap & Variations - 3 Years',
         'React - 1 year, 6 months',
         'Redux - 1 year',
         'Angular Js (1.5.x) - 6 months',

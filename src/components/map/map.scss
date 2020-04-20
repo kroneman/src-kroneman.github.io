@@ -38,6 +38,7 @@ $svg-stroke-animation-color: theme-color(primary) !default;
   }
 
   .svg-path-animation--start {
+    opacity: .5;
     stroke: $svg-stroke-animation-color;
     stroke-width: 7500;
     animation-name: draw;

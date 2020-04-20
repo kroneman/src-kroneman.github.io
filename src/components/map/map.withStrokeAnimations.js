@@ -1,18 +1,23 @@
-// Used for unbinding events
-const listeners = [];
-const vendorPrefix = ['webkit', 'moz', 'MS', 'o', ''];
 // https://codepen.io/MyXoToD/post/howto-self-drawing-svg-animation
+const vendorPrefix = ['webkit', 'moz', 'MS', 'o', ''];
 
 export default {
   data: () => ({
     animationListeners: [],
     animationIndex: 0,
-    animationClass: '',
-    viewBox: null,
+    animationMapClass: 'animated-map',
+    animationClass: 'svg-path-animation--start',
+    itemsToAnimateSelector: '.flight-route',
     itemsToAnimate: null,
+    animationLoopCount: 0,
+    loopAnimation: 3,
+    // Controls how long the animation 'holds' after it completes the path
+    // Before Restarting the animation from the beginning
+    loopRestartDelay: 1500,
     events: {
-      start: 'AnimationStart',
-      iteration: 'AnimationIteration',
+      // Start and iteration aren't being used
+      // start: 'AnimationStart',
+      // iteration: 'AnimationIteration',
       end: 'AnimationEnd',
     },
   }),
@@ -21,11 +26,9 @@ export default {
       return;
     }
 
-    this.fillColor = '#0e2c38';
-    this.$el.classList.add('animated-map');
-    this.viewBox = this.getViewBox();
-    this.itemsToAnimate = this.$el.querySelectorAll('.flight-route');
-    this.animationClass = 'svg-path-animation--start';
+    this.$el.classList.add(this.animationMapClass);
+    this.itemsToAnimate = this.$el.querySelectorAll(this.itemsToAnimateSelector);
+
 
     if (!this.itemsToAnimate) {
       return;
@@ -34,18 +37,10 @@ export default {
     this.animatepathsSequentially(this.itemsToAnimate);
   },
   methods: {
-    getViewBox() {
-      const svgEl = this.$el.querySelector('svg');
-      const viewBoxAttribute = svgEl.getAttribute('viewBox');
-      const mapSquaredArea = viewBoxAttribute.split(' ')
-        .map((n) => parseInt(n, 10))
-        // eslint-disable-next-line no-return-assign,no-param-reassign
-        .reduce((result, current) => result += Math.abs(current), 0);
-      this.scaleFactor = Math.floor(mapSquaredArea / 200);
-      this.circleScaleFactor = Math.floor(this.scaleFactor * 0.66);
-    },
     animatepathsSequentially(pathsToAnimate) {
       if (this.animationIndex >= pathsToAnimate.length) {
+        console.log('all done');
+        this.checkLoop();
         return;
       }
 
@@ -62,39 +57,78 @@ export default {
       );
 
       this.animationListener(currentPath, () => {
-        debugger;
         this.animationIndex += 1;
         this.animatepathsSequentially(pathsToAnimate);
       });
     },
-    prefixEvent(element, eventType, eventHandler) {
-      const lenPrefix = vendorPrefix.length;
-      for (let currentPrefix = 0; currentPrefix < lenPrefix; currentPrefix += 1) {
-        if (!vendorPrefix[currentPrefix]) {
-          // eslint-disable-next-line no-param-reassign
-          eventType = eventType.toLowerCase();
-        }
-
-        listeners.push({
-          element,
-          eventType,
-          eventHandler,
+    checkLoop() {
+      // don't want to double bind
+      const resetAnimationState = () => {
+        this.removeListeners();
+        this.itemsToAnimate.forEach((el) => {
+          el.classList.remove(this.animationClass);
+          el.removeAttribute('style');
         });
+        this.animationIndex = 0;
+      };
 
-        element.addEventListener(vendorPrefix[currentPrefix] + eventType, eventHandler, false);
+
+      // if null or false just stop
+      if (!this.loopAnimation) {
+        return;
+      }
+
+      if (this.loopAnimation === true) {
+        setTimeout(() => {
+          resetAnimationState();
+          this.animatepathsSequentially(this.itemsToAnimate);
+        }, this.loopRestartDelay);
+        return;
+      }
+
+      // assume this.loopAnimation is a number beyond this point
+      if (typeof this.loopAnimation !== 'number') {
+        return;
+      }
+
+      if (this.animationLoopCount < this.loopAnimation) {
+        setTimeout(() => {
+          this.animationLoopCount += 1;
+          resetAnimationState();
+          this.animatepathsSequentially(this.itemsToAnimate);
+        }, this.loopRestartDelay);
       }
     },
     animationListener(element, handler) {
       this.prefixEvent(element, this.events.end, handler);
     },
+    prefixEvent(element, eventType, eventHandler) {
+      const lenPrefix = vendorPrefix.length;
+      for (let currentPrefix = 0; currentPrefix < lenPrefix; currentPrefix += 1) {
+        const eventName = vendorPrefix[currentPrefix] === ''
+          ? eventType.toLowerCase() : eventType;
+
+        const eventConfig = {
+          element,
+          type: vendorPrefix[currentPrefix] + eventName,
+          eventHandler,
+        };
+
+        this.animationListeners.push(eventConfig);
+        element.addEventListener(eventConfig.type, eventHandler, false);
+      }
+    },
     removeListeners() {
       const numListeners = this.animationListeners.length;
       let current = 0;
-      while (current <= numListeners) {
-        const currentEvent = numListeners[current];
-        currentEvent.element.removeEventListener(currentEvent.type, currentEvent.callback);
+      while (current < numListeners) {
+        const currentEvent = this.animationListeners[current];
+        currentEvent.element.removeEventListener(currentEvent.type, currentEvent.eventHandler, false);
         current += 1;
       }
+
+      // to avoid an ever growing list of event listeners to unbind
+      this.animationListeners = [];
     },
   },
 };

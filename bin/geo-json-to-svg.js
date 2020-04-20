@@ -19,7 +19,7 @@ const dataset = require('../data/mapboxdataset.json');
 const styles = {
   Point: {
     fill: '#ff7433',
-    opacity: 1,
+    opacity: .5,
     stroke: 'none',
     radius: 15000
   },
