@@ -1,14 +1,11 @@
 #! /usr/bin/env node
-
-console.log('map dataset');
-
-
 const path = require('path');
 const util = require('util');
 const fse = require('fs-extra');
 const axios = require('axios');
 
-const OUTPUT_PATH = path.resolve(__dirname, '../data/mapboxdataset.json');
+const writeJSON = util.promisify(fse.writeJSON);
+const OUTPUT_PATH = path.resolve(__dirname, '../../data/mapboxdataset.json');
 require('dotenv').config({
   path: path.resolve('.env'),
 });
@@ -28,9 +25,8 @@ const api = axios.create({
     'Cache-Control': 'no-cache',
   },
 });
-const writeJSON = util.promisify(fse.writeJSON);
 
-main();
+module.exports = main;
 async function main() {
   try {
     const dataSet = await getDataSetFeatures();
@@ -42,7 +38,7 @@ async function main() {
 
     await writeJSON(OUTPUT_PATH, dataSet);
     // eslint-disable-next-line no-console
-    console.log(`Updated mapboxdataset and placed in ${OUTPUT_PATH}`);
+    console.info(`Updated Mapbox dataset and placed in ${OUTPUT_PATH}`);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);

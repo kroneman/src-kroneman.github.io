@@ -1,13 +1,14 @@
 {
-  "name": "Kroneman.io",
+  "name": "kroneman.io",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "download-map-data-set": "./bin/download-map-data-set.js",
-    "build-svg-map": "./bin/geo-json-to-svg.js",
+    "map-download": "bin/map-tools.js --download",
+    "map-build": "bin/map-tools.js --build",
+    "map-update": "bin/map-tools.js --download --build",
     "deploy": "npm run build && ./bin/deploy-kroneman-io"
   },
   "dependencies": {

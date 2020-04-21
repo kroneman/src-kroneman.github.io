@@ -11,17 +11,17 @@ const EPSG3857 = require('epsg-index/s/3857.json');
 const turf = require('@turf/turf');
 const has = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
 
-const OUTPUT_PATH = path.resolve(__dirname, '../src/components/map/');
+const OUTPUT_PATH = path.resolve(__dirname, '../../src/components/map/');
 const VUE_TEMPLATE = path.resolve(OUTPUT_PATH, './map.template.vue');
 const OUTPUT_FILE = path.join(OUTPUT_PATH, './map.generated.vue');
 
-const dataset = require('../data/mapboxdataset.json');
+const dataset = require('../../data/mapboxdataset.json');
 const styles = {
   Point: {
     fill: '#ff7433',
     opacity: .5,
     stroke: 'none',
-    radius: 15000
+    radius: 7500
   },
   Polygon: {
     fill: 'transparent',
@@ -39,7 +39,7 @@ const styles = {
 };
 styles.MultiPolygon = styles.Polygon;
 
-main();
+module.exports = main;
 
 async function main() {
   const filteredData = filterLineStrings(dataset);
