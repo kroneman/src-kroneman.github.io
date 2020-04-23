@@ -99,6 +99,15 @@ $property-generation-config: (
             54: 54px,
             56: 56px,
         )
+    ),
+    'line-height': (
+        property: 'line-height',
+        namespace: 'lh',
+        values: (
+            0: 0,
+            1: 1em,
+            2: 2em
+        )
     )
 );
 
@@ -133,6 +142,8 @@ $spacing-property-generation: (
     )
 );
 
+@include generate-grid-all-breakpoints($grid-config...);
+
 @each $spacing-id, $spacing-property-config in $spacing-property-generation {
     @include generate-spacing-all-breakpoints($spacing-property-config...);
 }
@@ -140,5 +151,3 @@ $spacing-property-generation: (
 @each $property-id, $property-config in $property-generation-config {
     @include generate-property-all-breakpoints($property-config...);
 }
-
-@include generate-grid-all-breakpoints($grid-config...);

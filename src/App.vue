@@ -1,11 +1,7 @@
 <template>
   <div>
     <Header />
-    <div class="container">
-      <!-- <div id="nav">
-        <router-link to="/">Home</router-link>|
-        <router-link to="/about">About</router-link>
-      </div> -->
+    <div class="app-container">
       <router-view />
     </div>
   </div>

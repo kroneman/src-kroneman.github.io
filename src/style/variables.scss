@@ -40,30 +40,31 @@ $font-types: (
     primary: (
         default: (font-family: primary, font-size: 1em, line-height: normal, letter-spacing: normal)
     ),
-    type-1: (font: 700 30px font-family(tertiary), letter-spacing: normal, line-height: normal),
-    type-2: (font: 700 28px font-family(tertiary), letter-spacing: normal, line-height: normal),
-    type-3: (font: 700 26px font-family(secondary), letter-spacing: normal, line-height: normal),
-    type-4: (font: 700 24px font-family(secondary), letter-spacing: -.5px, line-height: normal),
-    type-5: (font: 700 22px font-family(secondary), letter-spacing: normal, line-height: normal),
-    type-6: (font: 700 20px font-family(secondary), letter-spacing: normal, line-height: normal),
-    type-7: (font: 700 18px/1.5 font-family(primary), letter-spacing: normal),
-    type-8: (font: 400 16px/1.5 font-family(secondary), letter-spacing: normal),
-    type-9: (font: 400 14px/1.5 font-family(primary), letter-spacing: normal),
-    type-10: (font: 400 12px/1.5 font-family(secondary), letter-spacing: normal),
-    type-11: (font: 400 10px/1.5 font-family(primary), letter-spacing: normal),
-    type-12: (font: 400 8px/1.5 font-family(secondary), letter-spacing: normal),
 
     // default body text
-    default: type-8,
+    default: (font: 400 16px/1.5 font-family(secondary), letter-spacing: normal),
     small: type-10,
 
+    type-1: (font: 700 30px font-family(tertiary), letter-spacing: normal, line-height: normal),
+    type-2: (font: 700 28px font-family(tertiary), letter-spacing: normal, line-height: normal),
+    type-3: (font: 700 26px font-family(tertiary), letter-spacing: normal, line-height: normal),
+    type-4: (font: 700 24px font-family(tertiary), letter-spacing: -.5px, line-height: normal),
+    type-5: (font: 700 22px font-family(secondary), letter-spacing: normal, line-height: normal),
+    type-6: (font: 700 20px font-family(secondary), letter-spacing: normal, line-height: normal),
+    type-7: (font: 700 18px/1.5 font-family(secondary), letter-spacing: normal),
+    type-8: (font: 400 16px/1.5 font-family(secondary), letter-spacing: normal),
+    type-9: (font: 400 18px/1.5 font-family(primary), letter-spacing: normal),
+    type-10: (font: 400 16px/1.5 font-family(primary), letter-spacing: normal),
+    type-11: (font: 400 16px/1.5 font-family(secondary), letter-spacing: normal),
+    type-12: (font: 400 14px/1.5 font-family(secondary), letter-spacing: normal),
+
     // default headings
-    title-h1: (default: type-2, tablet-landscape: type-1),
-    title-h2: (default: type-3, tablet-landscape: type-2),
-    title-h3: (default: type-4, tablet-landscape: type-3),
-    title-h4: (default: type-5, tablet-landscape: type-4),
-    title-h5: (default: type-6, tablet-landscape: type-5),
-    title-h6: (default: type-7, tablet-landscape: type-6),
+    title-h1: (default: type-2, md: type-1),
+    title-h2: (default: type-4, md: type-3),
+    title-h3: (default: type-6, md: type-5),
+    title-h4: (default: type-8, md: type-7),
+    title-h5: (default: type-10, md: type-9),
+    title-h6: (default: type-12, md: type-11),
 
     header-title: (type: type-6, text-transform: none),
 );
@@ -76,12 +77,27 @@ $font-types: (
 $colors: (
   default: #444,  // text
   background: #fff, // page background
+
+  // https://www.color-hex.com/color-palette/2280
+  grey-1: #343d46,
+  grey-2: #4f5b66,
+  grey-3: #65737e,
+  grey-4: #a7adba,
+  grey-5: #c0c5ce
 );
 
 // Usage: theme-color(primary)
 $theme-colors: (
   primary: #ff7433, 
 
-  header-background: color(default),
-  default-text-color: color(default)
+  header-background: color(grey-1),
+  default-text-color: color(default),
+  alt-text: color(background),
+
+  // https://www.color-hex.com/color-palette/2280
+  grey-1: #343d46,
+  grey-2: #4f5b66,
+  grey-3: #65737e,
+  grey-4: #a7adba,
+  grey-5: rgba(#c0c5ce, 0.2)
 );

@@ -2,6 +2,12 @@
 
 .link-custom {
     a {
-        color: inherit;
+        &, &:visited, &:focus, &:active {
+            color: inherit;
+        }
+
+        &:hover {
+            color: theme-color(primary);
+        }
     }
 }

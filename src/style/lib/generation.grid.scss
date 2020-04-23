@@ -61,16 +61,20 @@ $grid-config: (
         margin-right: -$margin-value;
         display: flex;
         flex-wrap: wrap;
+        overflow: hidden;
     }
 
     // Create sets of columns
     $column-namespace: map-get($columns, 'namespace');
     $number-of-columns: map-get($columns, 'max');
     @for $i from 1 through $number-of-columns {
+        $percent-width: ($i / $number-of-columns * 100 + '%');
         .#{$column-namespace}#{$breakpoint-class-space}-#{$i} {
             padding-left: $margin-value;
             padding-right: $margin-value;
-            flex: 0 0 #{($i / $number-of-columns * 100 + '%')};
+            flex: 0 0 #{$percent-width};
+            max-width: #{$percent-width};
+
         }
     }
 

@@ -4,25 +4,25 @@
 }
 
 h1 {
-    @include font-type(type-1);
+    @include font-type(title-h1);
 }
 
 h2 {
-    @include font-type(type-2);
+    @include font-type(title-h2);
 }
 
 h3 {
-    @include font-type(type-3);
+    @include font-type(title-h3);
 }
 
 h4 {
-    @include font-type(type-4);
+    @include font-type(title-h4);
 }
 
 h5 {
-    @include font-type(type-5);
+    @include font-type(title-h5);
 }
 
 h6 {
-    @include font-type(type-6);
+    @include font-type(title-h6);
 }
