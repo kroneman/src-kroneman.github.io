@@ -62,7 +62,8 @@
       </div>
     </div>
 
-    <div class="home-section bg-grey-1 clr-background py-6">
+    <div class="home-section bg-grey-1 clr-background py-6" style="position: relative">
+      <animation-canvas />
       <div class="container d-flex align-items-center">
         <div class="d-block w-100">
           <div class="row align-items-center">
@@ -120,6 +121,7 @@
 import Icon from '@/components/icon.vue';
 import linkCustom from '@/components/link-custom/link-custom.vue';
 import animationMap from '@/components/map/map.generated.vue';
+import animationCanvas from '@/components/animation-canvas/animation-canvas.vue';
 
 export default {
   name: 'Home',
@@ -127,6 +129,7 @@ export default {
     Icon,
     linkCustom,
     animationMap,
+    animationCanvas,
   },
   data() {
     return {
