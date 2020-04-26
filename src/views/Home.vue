@@ -45,7 +45,8 @@
       </div>
     </div>
 
-    <div class="home-section">
+    <div class="home-section" style="position: relative">
+      <animation-canvas animation-type="particle" />
       <div class="container d-flex align-items-center">
         <div class="d-block w-100">
           <div class="row align-items-center">
@@ -220,20 +221,20 @@ export default {
           text: 'shiptracker.portofrotterdam.com',
         },
         {
-          link: 'https://omoda.nl',
-          text: 'omoda.nl',
-        },
-        {
-          link: 'https://www.ladress.com',
-          text: 'ladress.com',
-        },
-        {
           link: 'https://my.portofrotterdam.com/login?redirect=%2Fdashboard',
           text: 'my.portofrotterdam.com',
         },
         {
           link: 'https://king.portofrotterdam.com/calendar',
           text: 'king.portofrotterdam.com',
+        },
+        {
+          link: 'https://omoda.nl',
+          text: 'omoda.nl',
+        },
+        {
+          link: 'https://www.ladress.com',
+          text: 'ladress.com',
         },
         {
           link: 'https://www.fuelforfans.com/',
