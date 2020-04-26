@@ -45,7 +45,9 @@ export default {
     },
     drawCircle() {
       const { circleAnimationRadius, canvas } = this;
-      const minDimension = Math.min(canvas.width, canvas.height);
+      // Prefer just using height, looks better on both types of devices
+      // const minDimension = Math.min(canvas.width, canvas.height);
+      const minDimension = canvas.height;
       const isRunning = circleAnimationRadius < (minDimension / (2 * window.devicePixelRatio));
       if (isRunning) {
         this.circleAnimation = requestAnimationFrame(this.createCircle);
