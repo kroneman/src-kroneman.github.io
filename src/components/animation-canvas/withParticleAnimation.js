@@ -2,8 +2,8 @@ import './animationFrame.polyfill';
 
 // Configuration, Play with these
 const config = {
-  particleNumber: 100,
-  maxParticleSize: 10,
+  particleNumber: 200,
+  maxParticleSize: 3,
   maxSpeed: 2,
 };
 
@@ -33,7 +33,7 @@ class Particle {
     // Radius of the space dust
     this.radius = Math.max(
       Math.ceil(Math.random() * config.maxParticleSize),
-      5, // creates a min radius of 5
+      1, // creates a min radius of 5
     );
     // Color of the rock, given some randomness
     this.color = Particle.colorVariation(colorPalette.randomMatterColor());
@@ -47,7 +47,7 @@ class Particle {
 
   static colorVariation(color) {
     const { r, g, b } = color;
-    const a = Math.random() * 0.2;
+    const a = Math.random() * 0.3;
 
     return `rgba(${r}, ${g}, ${b}, ${a})`;
   }
