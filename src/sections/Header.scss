@@ -7,6 +7,11 @@ $header-color-text: #fff;
     background: $header-background-color;
     color: $header-color-text;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
 
     &_title {
         @include font-type(header-title);
@@ -20,6 +25,10 @@ $header-color-text: #fff;
             &, &:visited, &:active, &:focus {
                 color: inherit;
                 text-decoration: none;
+            }
+
+            &:hover {
+                color: theme-color(primary);
             }
         }
     }
@@ -38,7 +47,7 @@ $header-social-list-hover-color: theme-color(primary) !default;
         padding: 0px;
 
         &_item {
-            margin-right: 10px;
+            margin-right: 20px;
 
             &:hover {
                 color: $header-social-list-hover-color;

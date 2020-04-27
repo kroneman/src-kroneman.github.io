@@ -1,14 +1,18 @@
 <template>
   <header class="header px-4">
     <div class="row align-items-center">
-      <div class="col-12 col-md-6 flex-grow">
-        <h1 class="p-0 m-0 py-2 header_title">
-          <a href="/" class="header_title_link">
-            {{title}}
-          </a>
-        </h1>
+      <div class="col-12 col-md-6 col-lg-9 col-xl-6 flex-grow">
+        <div class="d-flex align-items-center justify-content-center justify-content-md-left">
+          <h1 class="p-0 m-0 py-2 header_title">
+            <a href="/" class="header_title_link">
+              {{title}}
+            </a>
+          </h1>
+          <navigation />
+        </div>
       </div>
-      <div class="col-6 d-none d-md-flex flex-grow justify-content-right">
+
+      <div class="col col-xl-6 d-none d-md-flex flex-grow justify-content-right">
         <div class="social">
           <ul class="social_list">
             <li v-for="item in socialList"
@@ -29,11 +33,13 @@
 <script>
 import Icon from '@/components/icon.vue';
 import linkCustom from '@/components/link-custom/link-custom.vue';
+import navigation from '@/sections/Navigation.vue';
 
 export default {
   components: {
     Icon,
     linkCustom,
+    navigation,
   },
   data() {
     return {

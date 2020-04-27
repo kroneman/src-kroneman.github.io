@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 
-    <div class="home-section py-md-6 px-0">
+    <div id="Projects" class="home-section py-md-6 px-0">
       <div class="container d-flex align-items-center" style="overflow: hidden">
         <div class="row align-items-center">
           <div class="col-12">
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="home-section bg-grey-1 clr-background py-6" style="position: relative">
+    <div id="Experience" class="home-section bg-grey-1 clr-background py-6" style="position: relative">
       <animation-canvas />
       <div class="container d-flex align-items-center">
         <div class="d-block w-100">
@@ -63,8 +63,7 @@
       </div>
     </div>
 
-
-    <div class="home-section" style="position: relative">
+    <div id="Tech" class="home-section" style="position: relative">
       <animation-canvas animation-type="particle" />
       <div class="container d-flex align-items-center">
         <div class="d-block w-100">
@@ -82,7 +81,7 @@
       </div>
     </div>
 
-    <div class="home-section bg-grey-5 py-6 home-section--about text-center">
+    <div id="About" class="home-section bg-grey-5 py-6 home-section--about text-center">
       <animation-map class="home-section_map py-6" :animated-map="true" />
       <div class="container d-flex align-items-center">
         <div class="row px-4 align-items-center justify-content-center">
@@ -96,7 +95,7 @@
       </div>
     </div>
 
-    <div class="home-section">
+    <div id="Contact" class="home-section">
       <div class="container d-flex align-items-center">
         <div class="d-block w-100">
           <div class="row align-items-center justify-content-center">
@@ -165,7 +164,7 @@ export default {
         This perspective has allowed me to look outside of the box
         and approach problems with flexibility and with patience.`,
       ],
-      technologiesHeader: 'Technologies',
+      technologiesHeader: 'I work with',
       technologiesList: [
         'HTML - ~6 years',
         'CSS - 6+ years',
@@ -208,7 +207,7 @@ export default {
           duration: '2.5 Years',
         },
       ],
-      experienceProjectsText: 'Contributed to the development of the following projects',
+      experienceProjectsText: '',
       experienceProjects: [
         {
           link: 'https://suitsupply.com',
@@ -244,7 +243,7 @@ export default {
         },
       ],
       connectHeader: 'Get in touch',
-      connectMessage: 'I\'m currently looking for a job',
+      connectMessage: 'I\'m open to new opportunities',
       connectLinks: [
         {
           link: 'mailto:a.l.kroneman@gmail.com?subject=kroneman.io',

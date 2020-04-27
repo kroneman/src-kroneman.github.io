@@ -78,6 +78,12 @@ $grid-config: (
         }
     }
 
+    .#{$column-namespace}#{$breakpoint-class-space} {
+        padding-left: $margin-value;
+        padding-right: $margin-value;
+        flex: 1;
+    }
+
     $alignment-vertical: map-get($alignment, 'vertical');
     $alignment-horizontal: map-get($alignment, 'horizontal');
     @include generate-property($alignment-vertical..., $property-breakpoint: $breakpoint-key);
