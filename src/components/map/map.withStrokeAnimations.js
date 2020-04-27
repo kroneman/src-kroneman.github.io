@@ -39,7 +39,6 @@ export default {
   methods: {
     animatepathsSequentially(pathsToAnimate) {
       if (this.animationIndex >= pathsToAnimate.length) {
-        console.log('all done');
         this.checkLoop();
         return;
       }

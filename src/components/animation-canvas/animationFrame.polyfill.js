@@ -1,5 +1,5 @@
 /**
- * Normalize animation frame but give different name
+ * Normalize animation frame but give different name to avoid conflict with base
  */
 window.requestAnimFrame = (function requestAnimFrame() {
   return (
