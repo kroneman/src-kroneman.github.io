@@ -31,38 +31,6 @@
       </div>
     </div>
 
-    <div class="home-section bg-grey-5 py-6 home-section--about text-center">
-      <animation-map class="home-section_map py-6" :animated-map="true" />
-      <div class="container d-flex align-items-center">
-        <div class="row px-4 align-items-center justify-content-center">
-          <div class="col-12 col-md-10 col-lg-8 col-xl-6 py-6">
-            <h2>{{aboutHeader}}</h2>
-            <p v-for="paragraph in aboutParagraphs" :key="paragraph" class="fs-md-20 lh-2">
-              {{paragraph}}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="home-section" style="position: relative">
-      <animation-canvas animation-type="particle" />
-      <div class="container d-flex align-items-center">
-        <div class="d-block w-100">
-          <div class="row align-items-center">
-            <div class="col-12 py-6">
-              <h2>{{technologiesHeader}}</h2>
-              <ul class="mx-auto d-inline-block text-center px-0 list no-bullets">
-                <li v-for="tech in technologiesList" :key="tech">
-                  {{tech}}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="home-section bg-grey-1 clr-background py-6" style="position: relative">
       <animation-canvas />
       <div class="container d-flex align-items-center">
@@ -95,12 +63,46 @@
       </div>
     </div>
 
+
+    <div class="home-section" style="position: relative">
+      <animation-canvas animation-type="particle" />
+      <div class="container d-flex align-items-center">
+        <div class="d-block w-100">
+          <div class="row align-items-center">
+            <div class="col-12 py-6">
+              <h2>{{technologiesHeader}}</h2>
+              <ul class="mx-auto d-inline-block text-center px-0 list no-bullets">
+                <li v-for="tech in technologiesList" :key="tech">
+                  {{tech}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-section bg-grey-5 py-6 home-section--about text-center">
+      <animation-map class="home-section_map py-6" :animated-map="true" />
+      <div class="container d-flex align-items-center">
+        <div class="row px-4 align-items-center justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8 col-xl-6 py-6">
+            <h2>{{aboutHeader}}</h2>
+            <p v-for="paragraph in aboutParagraphs" :key="paragraph" class="fs-md-20 lh-2">
+              {{paragraph}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="home-section">
       <div class="container d-flex align-items-center">
         <div class="d-block w-100">
           <div class="row align-items-center justify-content-center">
             <div class="col-12">
               <h2>{{connectHeader}}</h2>
+              <p>{{connectMessage}}</p>
               <ul
                 class="px-0 mx-auto row-md justify-content-center align-items-center text-center text-md-left py-4 list no-bullets"
               >
@@ -206,7 +208,7 @@ export default {
           duration: '2.5 Years',
         },
       ],
-      experienceProjectsText: 'I\'ve maintained / contributed to / released iterations of the following sites',
+      experienceProjectsText: 'Contributed to the development of the following projects',
       experienceProjects: [
         {
           link: 'https://suitsupply.com',
@@ -242,26 +244,27 @@ export default {
         },
       ],
       connectHeader: 'Get in touch',
+      connectMessage: 'I\'m currently looking for a job',
       connectLinks: [
         {
           link: 'mailto:a.l.kroneman@gmail.com?subject=kroneman.io',
-          text: 'Send an email',
+          text: 'Email',
           external: false,
           email: true,
         },
         {
           link: 'https://www.linkedin.com/in/kroneman/',
-          text: 'Connect on Linkedin',
+          text: 'Linkedin',
           external: true,
         },
         {
           link: 'https://stackoverflow.com/users/6598680/lkroneman',
-          text: 'Send a message on StackOverflow',
+          text: 'StackOverflow',
           external: true,
         },
         {
           link: 'https://github.com/kroneman',
-          text: 'Follow me / give feedback on Github',
+          text: 'Github',
           external: true,
         },
       ],
