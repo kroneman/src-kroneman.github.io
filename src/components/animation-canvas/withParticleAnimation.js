@@ -5,7 +5,7 @@ export default {
   props: {
     particleNumber: {
       type: Number,
-      default: 100,
+      default: 150,
     },
   },
   data() {
