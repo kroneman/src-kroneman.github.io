@@ -7,12 +7,12 @@
     right: 0;
     left: 0;
     opacity: 0;
+    transition: opacity 1500ms ease-in-out;
 
     z-index: 0;
-
     & + * {
         z-index: 1;
-    }   
+    }
 
     canvas {
         max-height: 100%;
