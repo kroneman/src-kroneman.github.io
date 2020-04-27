@@ -33,7 +33,7 @@
       v-if="name === 'stackoverflow'"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 120 120"
-      style="min-width: 34px"
+      :class="name"
     >
       <path fill="currentColor" class="st0" d="M84.4 93.8V70.6h7.7v30.9H22.6V70.6h7.7v23.2z" />
       <path
@@ -150,8 +150,9 @@ export default {
 </script>
 
 <style lang="scss">
+$icon-size: 20px;
 .icon {
-  min-width: 24px;
+  min-width: $icon-size;
   width: 100%;
   height: auto;
   color: inherit;
@@ -162,8 +163,13 @@ export default {
 
   svg {
     width: auto;
-    min-width: 24px;
+    min-width: $icon-size;
     display: block;
+  }
+
+  .stackoverflow {
+    min-width: $icon-size * 1.5;
+    margin: 0 -($icon-size - ($icon-size / 2));
   }
 }
 </style>
