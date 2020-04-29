@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { debounce, isInViewport } from '@/utils';
+
 export default {
   name: 'Navigation',
   data() {
@@ -26,7 +28,7 @@ export default {
         {
           anchor: '#Projects',
           title: 'Projects',
-          isActive: true,
+          isActive: false,
           anchorLocation: null,
           anchorElement: null,
         },
@@ -62,8 +64,13 @@ export default {
     };
   },
   mounted() {
-    this.getAnchorLocations();
-    window.addEventListener('scroll', this.onScroll);
+    this.$nextTick(() => {
+      this.navLinks = this.navLinks.map(this.getAnchorElements);
+      this.getAnchorLocations();
+      this.onScroll();
+      window.addEventListener('scroll', this.onScroll);
+      window.addEventListener('resize', this.getAnchorLocations);
+    });
   },
   methods: {
     scrollTo(e, anchorElement) {
@@ -75,39 +82,38 @@ export default {
 
       const originalTop = distanceToTop(anchorElement);
       window.scrollBy({ top: originalTop, left: 0, behavior: 'smooth' });
-
-      const checkIfDone = setInterval(() => {
-        const atBottom = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2;
-        if (distanceToTop(anchorElement) === 0 || atBottom) {
-          anchorElement.focus();
-          clearInterval(checkIfDone);
-        }
-      }, 100);
     },
     onScroll() {
-      const headerHeight = 60;
-      const scrollDistance = window.pageYOffset + headerHeight;
-      const windowHeight = window.innerHeight;
-
-      const lowerBound = scrollDistance - windowHeight * (2 / 3);
-      const upperBound = scrollDistance + (windowHeight * (2 / 3));
-      this.navLinks = this.navLinks.map((navLink) => ({
-        ...navLink,
-        isActive: navLink.anchorLocation > lowerBound
-          && navLink.anchorLocation < upperBound,
-      }));
-    },
-    getAnchorLocations() {
-      this.navLinks = this.navLinks.map((navlink) => {
-        const anchorElement = document.querySelector(navlink.anchor);
-        const anchorLocation = Math.floor(anchorElement.getBoundingClientRect().top);
+      const updatedAnchorElements = this.navLinks.map((navLink) => {
+        const isActive = navLink.anchorElement ? isInViewport(navLink.anchorElement, 500) : false;
         return {
-          ...navlink,
-          anchorElement: anchorElement || null,
+          ...navLink,
+          isActive,
+        };
+      });
+
+      this.navLinks = updatedAnchorElements;
+    },
+    getAnchorElements(navLink) {
+      const anchorElement = document.querySelector(navLink.anchor);
+      return {
+        ...navLink,
+        anchorElement,
+      };
+    },
+    getAnchorLocations: debounce(function getAnchorLocations() {
+      this.navLinks = this.navLinks.map((navLink) => {
+        if (!navLink.anchorElement) {
+          return navLink;
+        }
+
+        const anchorLocation = Math.floor(navLink.anchorElement.getBoundingClientRect().top);
+        return {
+          ...navLink,
           anchorLocation: anchorLocation || null,
         };
       }).filter((item) => Boolean(item.anchorElement));
-    },
+    }, 100),
   },
 };
 </script>

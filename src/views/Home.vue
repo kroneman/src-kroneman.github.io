@@ -5,9 +5,9 @@
       <div class="container d-flex align-items-center" style="overflow: hidden">
         <div class="row align-items-center">
           <div class="col-12">
-            <h2 class="my-md-3 pb-md-4 py-md-4">{{introText}}</h2>
+            <h2 class="my-md-3 pb-md-4 py-md-4">{{homeData.introText}}</h2>
             <div class="row justify-content-center">
-              <div class="col-12 col-md-6 col-lg-4 px-md-4 pb-6" v-for="introItem in introItems" :key="introItem.title">
+              <div class="col-12 col-md-6 col-lg-4 px-md-4 pb-6" v-for="introItem in homeData.introItems" :key="introItem.title">
                 <div class="card_image">
                   <img v-if="introItem.image" :src="introItem.image" />
                   <icon v-if="introItem.icon" :name="introItem.icon" />
@@ -37,19 +37,19 @@
         <div class="d-block w-100">
           <div class="row align-items-center">
             <div class="col-12 text-center">
-              <h2 class="text-center">{{experienceHeader}}</h2>
+              <h2 class="text-center">{{homeData.experienceHeader}}</h2>
               <div class="row justify-content-center">
-                <div v-for="company in experienceCompanies" :key="company.titleLocation">
+                <div v-for="company in homeData.experienceCompanies" :key="company.titleLocation">
                   <div class="py-4 p-md-4 text-left d-inline-block mx-auto">
                     <p class="fs-30 my-1 text-center">{{company.duration}}</p>
                     <h3 class="text-center my-1">{{company.titleLocation}}</h3>
                   </div>
                 </div>
               </div>
-              <p>{{experienceProjectsText}}</p>
+              <p>{{homeData.experienceProjectsText}}</p>
               <ul class="mx-auto d-inline-block text-center py-4 px-0 list no-bullets">
                 <li
-                  v-for="project in experienceProjects" :key="project.text"
+                  v-for="project in homeData.experienceProjects" :key="project.text"
                   class="pt-md-1"
                 >
                   <link-custom :href="project.link" :external="true" eventAction="experienceProject">
@@ -69,9 +69,9 @@
         <div class="d-block w-100">
           <div class="row align-items-center">
             <div class="col-12 py-6">
-              <h2>{{technologiesHeader}}</h2>
-              <ul class="mx-auto d-inline-block text-center px-0 list no-bullets">
-                <li v-for="tech in technologiesList" :key="tech">
+              <h2>{{homeData.technologiesHeader}}</h2>
+              <ul class="mx-auto d-inline-block text-center px-0 list no-bullets equal-height">
+                <li v-for="(tech, index) in homeData.technologiesList" :key="tech + index">
                   {{tech}}
                 </li>
               </ul>
@@ -86,8 +86,8 @@
       <div class="container d-flex align-items-center">
         <div class="row px-4 align-items-center justify-content-center">
           <div class="col-12 col-md-10 col-lg-8 col-xl-6 py-6">
-            <h2>{{aboutHeader}}</h2>
-            <p v-for="paragraph in aboutParagraphs" :key="paragraph" class="fs-md-20 lh-2">
+            <h2>{{homeData.aboutHeader}}</h2>
+            <p v-for="paragraph in homeData.aboutParagraphs" :key="paragraph" class="fs-md-20 lh-2">
               {{paragraph}}
             </p>
           </div>
@@ -100,12 +100,12 @@
         <div class="d-block w-100">
           <div class="row align-items-center justify-content-center">
             <div class="col-12">
-              <h2>{{connectHeader}}</h2>
-              <p>{{connectMessage}}</p>
+              <h2>{{homeData.connectHeader}}</h2>
+              <p>{{homeData.connectMessage}}</p>
               <ul
                 class="px-0 mx-auto row-md justify-content-center align-items-center text-center text-md-left py-4 list no-bullets"
               >
-                <li v-for="linkItem in connectLinks" :key="linkItem.text" class="pt-2 pt-md-0 px-md-4 text-md-center">
+                <li v-for="linkItem in homeData.connectLinks" :key="linkItem.text" class="pt-2 pt-md-0 px-md-4 text-md-center">
                   <link-custom :href="linkItem.link" :external="linkItem.external" :email="linkItem.email">
                     {{linkItem.text}}
                   </link-custom>
@@ -133,141 +133,10 @@ export default {
     animationMap,
     animationCanvas,
   },
-  data() {
-    return {
-      introText: 'Projects / Articles',
-      introItems: [
-        {
-          image: 'https://github.com/kroneman/map-conquest/blob/master/map-conquest.jpg?raw=true',
-          title: 'Map conquest',
-          text: 'Map conquest is my hobby project, a risk-clone built using socket.io, express, mapbox and vue.js',
-          link: 'https://github.com/kroneman/map-conquest',
-          linkText: 'View Repository',
-          linkExternal: true,
-        },
-        {
-          image: '',
-          icon: 'google-app-script',
-          title: 'Google apps script: localization',
-          text: 'Scripts google\'s language app in google apps script to speed up setting up initial localization files',
-          link: 'https://github.com/kroneman/google-apps-script--app-localization',
-          linkText: 'View Repository',
-          linkExternal: true,
-        },
-      ],
-      aboutHeader: 'About Me',
-      aboutParagraphs: [
-        `Having spent a significant amount of time in countries other my own
-        has given me a unique perspective.
-        I grew up in Indonesia, went to University in America,
-        and lived in the Netherlands for five years.
-        This perspective has allowed me to look outside of the box
-        and approach problems with flexibility and with patience.`,
-      ],
-      technologiesHeader: 'I work with',
-      technologiesList: [
-        'HTML - ~6 years',
-        'CSS - 6+ years',
-        'Javascript - ~6 years',
-        'Typescript - ~1 year',
-        'Node Js - 4 years',
-        'Linux - ~4 years',
-        'Mac - ~4 years',
-        'Windows - ~1 Year',
-
-        'Webpack - 3 years',
-        'Grunt - 1 year',
-        'Gulp - 6 months',
-
-        'SASS - 6 years',
-        'LESS - 1 year',
-        'Bootstrap & Variations - 3 Years',
-        'React - 1 year, 6 months',
-        'Redux - 1 year',
-        'Angular Js (1.5.x) - 6 months',
-        'Vue Js - 1 Year',
-
-        'Express Js - 1 year',
-        'Hapi Js - 6 months',
-        'Jest - 6 months',
-        'Mocha - 3 months',
-        'Docker - 1 year',
-        'Nginx - 4 months',
-        'Bash - 2 Years',
-        'Websockets - 8 months',
-      ],
-      experienceHeader: 'Experience',
-      experienceCompanies: [
-        {
-          titleLocation: 'Clockwork, Amsterdam',
-          duration: '2.5 Years',
-        },
-        {
-          titleLocation: 'Suitsupply, Amsterdam',
-          duration: '2.5 Years',
-        },
-      ],
-      experienceProjectsText: '',
-      experienceProjects: [
-        {
-          link: 'https://suitsupply.com',
-          text: 'suitsupply.com',
-        },
-        {
-          link: 'https://suistudio.com',
-          text: 'suistudio.com',
-        },
-        {
-          link: 'https://shiptracker.portofrotterdam.com/#!/',
-          text: 'shiptracker.portofrotterdam.com',
-        },
-        {
-          link: 'https://my.portofrotterdam.com/login?redirect=%2Fdashboard',
-          text: 'my.portofrotterdam.com',
-        },
-        {
-          link: 'https://king.portofrotterdam.com/calendar',
-          text: 'king.portofrotterdam.com',
-        },
-        {
-          link: 'https://omoda.nl',
-          text: 'omoda.nl',
-        },
-        {
-          link: 'https://www.ladress.com',
-          text: 'ladress.com',
-        },
-        {
-          link: 'https://www.fuelforfans.com/',
-          text: 'fuelforfans.com',
-        },
-      ],
-      connectHeader: 'Get in touch',
-      connectMessage: 'I\'m open to new opportunities',
-      connectLinks: [
-        {
-          link: 'mailto:a.l.kroneman@gmail.com?subject=kroneman.io',
-          text: 'Email',
-          external: false,
-          email: true,
-        },
-        {
-          link: 'https://www.linkedin.com/in/kroneman/',
-          text: 'Linkedin',
-          external: true,
-        },
-        {
-          link: 'https://stackoverflow.com/users/6598680/lkroneman',
-          text: 'StackOverflow',
-          external: true,
-        },
-        {
-          link: 'https://github.com/kroneman',
-          text: 'Github',
-          external: true,
-        },
-      ],
-    };
+  computed: {
+    homeData() {
+      return this.$store.state.home;
+    },
   },
 };
 </script>

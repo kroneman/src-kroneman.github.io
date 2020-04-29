@@ -1,5 +1,5 @@
 <template>
-  <div class="animation-canvas" :style="{ opacity: canvasOpacity }" @click="animationCanvasClick">
+  <div class="animation-canvas" :style="{ opacity: canvasOpacity }">
     <canvas class="canvas"></canvas>
   </div>
 </template>
@@ -35,11 +35,6 @@ export default {
     if (this.animationType.toLowerCase() === 'particle') {
       this.initParticleAnimation();
     }
-  },
-  methods: {
-    animationCanvasClick() {
-
-    },
   },
 };
 </script>

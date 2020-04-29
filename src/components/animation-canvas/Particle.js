@@ -77,6 +77,26 @@ export default class Particle {
     this.directionInRadians = (this.direction * Math.PI) / 180;
   }
 
+  onResize(canvas) {
+    this.updateBounds(canvas);
+    this.randomizeLocation(canvas);
+    return this;
+  }
+
+  updateBounds(canvas) {
+    this.upperBounds = {
+      x: canvas.width,
+      y: canvas.height,
+    };
+    return this;
+  }
+
+  randomizeLocation(canvas) {
+    this.x = randomWithin(canvas.width);
+    this.y = randomWithin(canvas.height);
+    return this;
+  }
+
   isWithinBounds({ x, y }) {
     const { lowerBounds, upperBounds } = this;
     if (x < lowerBounds.x) {

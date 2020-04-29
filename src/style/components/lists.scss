@@ -2,4 +2,10 @@
     &.no-bullets {
         list-style-type: none;
     }
+
+    &.equal-height {
+        li {
+            min-height: 20px;
+        }
+    }
 }

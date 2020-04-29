@@ -14,6 +14,9 @@ export default {
       particleArray: [],
     };
   },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.setCanvasBounds);
+  },
   methods: {
     initParticleAnimation() {
       this.canvas = this.$el.querySelector('.canvas');
@@ -21,16 +24,22 @@ export default {
 
       this.timeStamp = Date.now();
       this.canvasOpacity = 1;
+      this.setCanvasBounds();
+      window.addEventListener('resize', this.setCanvasBounds);
 
+      this.frame();
+      this.createParticles(this.particleNumber);
+    },
+    setCanvasBounds() {
       const { canvas } = this;
-
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      this.frame();
-      this.createParticles(this.particleNumber);
+      if (this.particleArray.length) {
+        this.particleArray = this.particleArray.map((p) => p.onResize(canvas));
+      }
     },
     frame() {
       if (Date.now() < (this.timeStamp + Math.floor(1000 / 60))) {
