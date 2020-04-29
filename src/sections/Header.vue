@@ -3,7 +3,10 @@
     <div class="row align-items-center">
       <div class="col-12 col-md-6 col-lg-9 col-xl-6 flex-grow">
         <div class="d-flex align-items-center justify-content-center justify-content-md-left" style="positon: relative">
-          <mobile-drawer-icon @trigger="toggleDrawer" />
+          <mobile-drawer-icon
+            :isActive="isDrawerOpen"
+            @trigger="toggleDrawer"
+          />
           <h1 class="p-0 m-0 py-2 pl-md-5 pl-lg-0 header_title">
             <a href="/" class="header_title_link">
               {{title}}
@@ -64,8 +67,8 @@ export default {
   right: 30px;
   left: 30px;
   top: auto;
-  height: 2px;
-  background: darken(theme-color(primary), 20%);
+  height: 1px;
+  background: rgba(theme-color(grey-3), .5);
 
   @include respond(lg) {
       display: none;

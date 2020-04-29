@@ -2,6 +2,7 @@
 
 $header-nav-item-spacing: 40px !default;
 .nav {
+    flex: 1;
     @include respond(lg) {
         display: block;
         justify-content: left;
