@@ -2,41 +2,62 @@
 
 $header-nav-item-spacing: 40px !default;
 .nav {
-    display: none;
-
     @include respond(lg) {
         display: block;
         justify-content: left;
+        padding: 0 $header-nav-item-spacing;
     }
 
-    // border
-    padding: 0 $header-nav-item-spacing;
     &-list {
         list-style-type: none;
-        display: flex;
+        
         padding: 0;
         margin: 0;
 
-        &_item {
-            vertical-align: baseline;
-            margin: 3px $header-nav-item-spacing 0 0;
+        @include respond(lg) {
+            display: flex;
+        }
 
-            &:last-child {
-                margin: 3px 0 0 0;
+        &_item {
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 20px;
+
+            &:first-child {
+                padding-top: 30px;
+            }
+
+            @include respond(lg) {
+                font-size: inherit;
+                padding: 10px;
+                text-align: left;
+                vertical-align: baseline;
+                margin: 3px $header-nav-item-spacing 0 0;
+
+                &:first-child {
+                    padding: 10px;
+                }
+
+                &:last-child {
+                    margin: 3px 0 0 0;
+                }
             }
         }
 
         &_link {
-            &, &:visited, &:focus, &:active {
+            &, &:visited, &:focus, &:active, &:hover {
                 color: currentColor;
                 text-decoration: none;
                 cursor: pointer;
             }
-
-            scroll-behavior: smooth;
-
             &.is-active {
                 color: theme-color(primary);
+            }
+
+            @include respond(lg) {
+                &:hover {
+                    color: theme-color(primary);
+                }
             }
         }
     }

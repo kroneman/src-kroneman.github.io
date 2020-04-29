@@ -2,71 +2,73 @@
   <header class="header px-4">
     <div class="row align-items-center">
       <div class="col-12 col-md-6 col-lg-9 col-xl-6 flex-grow">
-        <div class="d-flex align-items-center justify-content-center justify-content-md-left">
-          <h1 class="p-0 m-0 py-2 header_title">
+        <div class="d-flex align-items-center justify-content-center justify-content-md-left" style="positon: relative">
+          <mobile-drawer-icon @trigger="toggleDrawer" />
+          <h1 class="p-0 m-0 py-2 pl-md-5 pl-lg-0 header_title">
             <a href="/" class="header_title_link">
               {{title}}
             </a>
           </h1>
-          <navigation />
+          <mobile-drawer :isOpen="isDrawerOpen">
+            <navigation @trigger="onNavigate" />
+            <div class="d-block d-md-none d-flex justify-content-center py-4 py-md-none" style="position: realtive">
+              <span class="mobile-line" />
+              <social-list class="pt-5" />
+            </div>
+          </mobile-drawer>
         </div>
       </div>
 
       <div class="col col-xl-6 d-none d-md-flex flex-grow justify-content-right">
-        <div class="social">
-          <ul class="social_list">
-            <li v-for="item in socialList"
-                :key="item.icon"
-                class="social_list_item py-2"
-            >
-              <link-custom :href="item.link" :external="true" class="social_list_link">
-                <icon :name="item.icon" style="max-width: 34px" />
-              </link-custom>
-            </li>
-          </ul>
-        </div>
+        <social-list />
       </div>
     </div>
   </header>
 </template>
 
 <script>
-import Icon from '@/components/icon.vue';
-import linkCustom from '@/components/link-custom/link-custom.vue';
+import mobileDrawer from '@/sections/MobileDrawer/MobileDrawer.vue';
+import mobileDrawerIcon from '@/sections/MobileDrawer/MobileDrawerIcon.vue';
 import navigation from '@/sections/Navigation.vue';
+import socialList from '@/sections/SocialList.vue';
 
 export default {
   components: {
-    Icon,
-    linkCustom,
     navigation,
+    mobileDrawer,
+    mobileDrawerIcon,
+    socialList,
   },
   data() {
     return {
+      isDrawerOpen: false,
       title: '@kroneman',
-      socialList: [
-        {
-          icon: 'stackoverflow',
-          link: 'https://stackoverflow.com/users/6598680/lkroneman',
-        },
-        {
-          icon: 'gmail',
-          link: 'mailto:a.l.kroneman@gmail.com?subject=kroneman.io',
-        },
-        {
-          icon: 'linkedin',
-          link: 'https://www.linkedin.com/in/kroneman/',
-        },
-        {
-          icon: 'github',
-          link: 'https://github.com/kroneman',
-        },
-      ],
     };
+  },
+  methods: {
+    toggleDrawer() {
+      this.isDrawerOpen = !this.isDrawerOpen;
+    },
+    onNavigate() {
+      this.isDrawerOpen = false;
+    },
   },
 };
 </script>
 
 <style lang="scss">
 @import "./Header.scss";
+.mobile-line {
+  content: '';
+  position: absolute;
+  right: 30px;
+  left: 30px;
+  top: auto;
+  height: 2px;
+  background: darken(theme-color(primary), 20%);
+
+  @include respond(lg) {
+      display: none;
+  }
+}
 </style>

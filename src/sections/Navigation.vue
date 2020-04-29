@@ -74,6 +74,7 @@ export default {
   },
   methods: {
     scrollTo(e, anchorElement) {
+      this.$emit('trigger');
       const distanceToTop = (el) => Math.floor(el.getBoundingClientRect().top);
       e.preventDefault();
       if (!anchorElement) {

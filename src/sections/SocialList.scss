@@ -1,0 +1,41 @@
+@import '~@/style/variables';
+
+$header-social-list-color: currentColor !default;
+$header-social-list-hover-color: theme-color(primary) !default;
+
+.social {
+    &_list {
+        margin: 0;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        list-style-type: none;
+        padding: 0px;
+
+        &_item {
+            margin-right: 20px;
+
+            &:hover {
+                color: $header-social-list-hover-color;
+                cursor: pointer;
+                transition: color 200ms ease-in-out;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &_link {
+            &, &:active, &:visited, &:focus {
+                color: inherit;
+            }
+
+            &:hover {
+                color: $header-social-list-hover-color;
+                cursor: pointer;
+                transition: color 200ms ease-in-out;
+            }
+        }
+    }
+}

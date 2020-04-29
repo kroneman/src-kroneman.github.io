@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 
-    <div id="Projects" class="home-section py-md-6 px-0">
+    <div id="Projects" class="home-section pt-6 py-md-6 px-0">
       <div class="container d-flex align-items-center" style="overflow: hidden">
         <div class="row align-items-center">
           <div class="col-12">
@@ -10,7 +10,7 @@
               <div class="col-12 col-md-6 col-lg-4 px-md-4 pb-6" v-for="introItem in homeData.introItems" :key="introItem.title">
                 <div class="card_image">
                   <img v-if="introItem.image" :src="introItem.image" />
-                  <icon v-if="introItem.icon" :name="introItem.icon" />
+                  <icon v-if="introItem.icon" :name="introItem.icon" class="full-size" />
                 </div>
                 <div class="card_text p-4">
                   <h4 class="my-1">{{introItem.title}}</h4>

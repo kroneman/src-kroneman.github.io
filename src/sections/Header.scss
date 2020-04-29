@@ -12,12 +12,18 @@ $header-color-text: #fff;
     left: 0;
     right: 0;
     z-index: 99;
+    padding: 5px 0;
+
+    @include respond(sm) {
+        padding: 0;
+    }
 
     &_title {
         @include font-type(header-title);
         text-align: center;
 
         @include respond(md) {
+            padding-left: 20px;
             text-align: left;
         }
 
@@ -29,46 +35,6 @@ $header-color-text: #fff;
 
             &:hover {
                 color: theme-color(primary);
-            }
-        }
-    }
-}
-
-$header-social-list-color: currentColor !default;
-$header-social-list-hover-color: theme-color(primary) !default;
-
-.social {
-    &_list {
-        margin: 0;
-        display: flex;
-        justify-content: right;
-        align-items: center;
-        list-style-type: none;
-        padding: 0px;
-
-        &_item {
-            margin-right: 20px;
-
-            &:hover {
-                color: $header-social-list-hover-color;
-                cursor: pointer;
-                transition: color 200ms ease-in-out;
-            }
-
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-
-        &_link {
-            &, &:active, &:visited, &:focus {
-                color: inherit;
-            }
-
-            &:hover {
-                color: $header-social-list-hover-color;
-                cursor: pointer;
-                transition: color 200ms ease-in-out;
             }
         }
     }
