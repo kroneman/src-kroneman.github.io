@@ -2,16 +2,16 @@ import { getScreenSize, debounce } from '@/utils';
 
 const listText = [
   'while(isAwake)',
+  'research()',
   'design()',
   'prototype()',
-  'commit()',
   'test()',
   'bugfix()',
+  'commit()',
   'refactor()',
-  'research()',
   'review()',
-  'learn()',
   'enjoy()',
+  'learn()',
   'repeat()',
 ];
 
