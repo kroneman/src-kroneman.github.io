@@ -17,7 +17,7 @@ export default {
         icon: 'google-app-script',
         title: 'Google apps script: localization',
         text:
-          'A script for Localization using google Translate Api and google Drive',
+          'A script for localization using Google Translate Api and Google Drive',
         link: 'https://github.com/kroneman/google-apps-script--app-localization',
         linkText: 'View Repository',
         linkExternal: true,

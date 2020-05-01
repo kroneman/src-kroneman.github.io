@@ -41,26 +41,21 @@ export default {
       this.screenSize = newScreenSize;
       this.canvas = this.$el.querySelector('.canvas');
       this.context = this.canvas.getContext('2d');
+
       this.circleAnimationRadius = 8;
       this.context.clearRect(0, 0, this.screenSize.width, this.screenSize.height);
-      this.setCanvasBounds();
+
+      this.setCircleCanvasBounds();
       this.drawCircle();
     }, 100),
-    setCanvasBounds() {
-      const {
-        canvas,
-        context,
-        deviceRatio,
-        screenSize,
-      } = this;
+    setCircleCanvasBounds() {
+      const { canvas, screenSize } = this;
       const { width, height } = screenSize;
-
       requestAnimationFrame(() => {
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
-        canvas.width = width * deviceRatio;
-        canvas.height = height * deviceRatio;
-        context.scale(deviceRatio, deviceRatio);
+        canvas.width = width;
+        canvas.height = height;
       });
     },
     createCircle() {

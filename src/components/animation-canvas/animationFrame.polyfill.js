@@ -7,7 +7,20 @@ window.requestAnimFrame = (function requestAnimFrame() {
     || window.webkitRequestAnimationFrame
     || window.mozRequestAnimationFrame
     || function customAnimationFrame(callback) {
-      window.setTimeout(callback, 1000 / 60);
+      return window.setTimeout(callback, 1000 / 60);
+    }
+  );
+}());
+
+/**
+ * Paired with above
+ */
+window.cancelAnimFrame = (function cancelAnimFrame() {
+  return (
+    window.cancelAnimationFrame
+    || window.mozCancelAnimationFrame
+    || function customCancelAnimationFrame(callback) {
+      return window.clearTimeout(callback);
     }
   );
 }());

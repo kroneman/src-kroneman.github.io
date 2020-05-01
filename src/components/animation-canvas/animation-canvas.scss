@@ -18,4 +18,13 @@
         max-height: 100%;
         max-width: 100%;
     }
+
+    &_button {
+        position: absolute;
+        color: #fff;
+        right: 0;
+        left: auto;
+        bottom: 0;
+        transform: translateY(-50%);
+    }
 }

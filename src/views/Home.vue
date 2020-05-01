@@ -2,7 +2,11 @@
   <div class="home">
 
     <div id="Intro" class="home-section bg-grey-1 clr-background py-6" style="position: relative">
-      <animation-canvas animation-type="intro" />
+      <animation-canvas
+        animation-type="intro"
+        :with-skip-animation="true"
+        :with-replay-animation="true"
+      />
     </div>
 
     <div id="Projects" class="home-section pt-6 py-md-6 px-0">
@@ -86,7 +90,11 @@
     </div>
 
     <div id="About" class="home-section bg-grey-5 py-6 home-section--about text-center">
-      <animation-map class="home-section_map py-6" :animated-map="true" />
+      <!-- <animation-map class="home-section_map py-6" :animated-map="true" /> -->
+      <scroll-container class="home-section_map-container py-6">
+        <animation-map :animated-map="true" />
+        <animation-map :animated-map="true" :delay-start="1000" />
+      </scroll-container>
       <div class="container d-flex align-items-center">
         <div class="row px-4 align-items-center justify-content-center">
           <div class="col-12 col-md-10 col-lg-8 col-xl-6 py-6">
@@ -134,6 +142,7 @@ import linkCustom from '@/components/link-custom/link-custom.vue';
 import animationMap from '@/components/map/map.generated.vue';
 import animationCanvas from '@/components/animation-canvas/animation-canvas.vue';
 import profileImage from '@/components/profile-image/profile-image.vue';
+import scrollContainer from '@/components/endless-horizontal-scroll/endless-horizontal-scroll.vue';
 
 export default {
   name: 'Home',
@@ -143,6 +152,7 @@ export default {
     animationMap,
     animationCanvas,
     profileImage,
+    scrollContainer,
   },
   computed: {
     homeData() {

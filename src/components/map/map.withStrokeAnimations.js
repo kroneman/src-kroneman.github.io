@@ -1,10 +1,16 @@
-import { throttle, isInViewport } from '@/utils';
+// import { throttle, isInViewport } from '@/utils';
 
 // https://codepen.io/MyXoToD/post/howto-self-drawing-svg-animation
 const vendorPrefix = ['webkit', 'moz', 'MS', 'o', ''];
 
 
 export default {
+  props: {
+    delayStart: {
+      type: Number,
+      default: 0,
+    },
+  },
   data: () => ({
     hasSequenceStarted: false,
     animationListeners: [],
@@ -33,25 +39,21 @@ export default {
     this.$el.classList.add(this.animationMapClass);
     this.itemsToAnimate = this.$el.querySelectorAll(this.itemsToAnimateSelector);
 
-
     if (!this.itemsToAnimate) {
       return;
     }
 
-    window.addEventListener('scroll', this.onScroll);
+    // window.addEventListener('scroll', this.onScroll);
+    this.onScroll();
   },
   methods: {
-    onScroll: throttle(function onScroll() {
-      if (this.hasSequenceStarted) {
-        window.removeEventListener('scroll', this.onScroll);
-        return;
-      }
-
-      if (isInViewport(this.$el)) {
-        this.hasSequenceStarted = true;
+    onScroll() {
+      this.hasSequenceStarted = true;
+      console.log(this.hasSequenceStarted);
+      window.setTimeout(() => {
         this.animatepathsSequentially(this.itemsToAnimate);
-      }
-    }, 100),
+      }, this.delayStart);
+    },
     animatepathsSequentially(pathsToAnimate) {
       if (this.animationIndex >= pathsToAnimate.length) {
         this.checkLoop();

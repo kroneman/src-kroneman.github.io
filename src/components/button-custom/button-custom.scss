@@ -1,0 +1,32 @@
+@import '@/style/variables';
+
+button,
+.button {
+    @include font-type(default);
+
+    transition: all 1000ms linear;
+    background: transparent;
+    padding: 15px 30px;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+        @include respond(md) {
+            text-decoration: none;
+            background: color(background);
+            color: theme-color(header-background);
+        }
+    }
+
+    &:active {
+        outline: none;
+    }
+
+    &.is-small {
+        padding: 7px 15px;
+    }
+
+    &.no-border {
+        border: none;
+    }
+}

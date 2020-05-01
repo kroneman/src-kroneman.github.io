@@ -1,6 +1,7 @@
-import { throttle, isInViewport } from '@/utils';
+import { throttle, isInViewport, getScreenSize } from '@/utils';
 import Particle, { colorPalette } from './Particle';
 
+const { requestAnimFrame } = window;
 export default {
   props: {
     particleNumber: {
@@ -13,10 +14,11 @@ export default {
       particleAnimationStarted: false,
       timeStamp: null,
       particleArray: [],
+      screenSize: null,
     };
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.setCanvasBounds);
+    window.removeEventListener('resize', this.setParticleCanvasBounds);
     window.removeEventListener('scroll', this.onScroll);
   },
   methods: {
@@ -27,7 +29,7 @@ export default {
       this.timeStamp = Date.now();
       this.canvasOpacity = 1;
 
-      window.addEventListener('resize', this.setCanvasBounds);
+      window.addEventListener('resize', this.setParticleCanvasBounds);
       window.addEventListener('scroll', this.onScroll);
     },
     onScroll: throttle(function onScroll() {
@@ -36,49 +38,61 @@ export default {
         return;
       }
 
-      if (!isInViewport(this.$el, 500)) {
+      if (!isInViewport(this.$el, 1000)) {
         return;
       }
 
       this.particleAnimationStarted = true;
-      this.setCanvasBounds();
-      this.frame();
+      this.setParticleCanvasBounds();
+      this.particleAnimationFrame();
       this.createParticles(this.particleNumber);
     }, 100),
-    setCanvasBounds() {
-      const { canvas } = this;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      if (this.particleArray.length) {
-        this.particleArray = this.particleArray.map((p) => p.onResize(canvas));
+    setParticleCanvasBounds() {
+      const newScreenSize = getScreenSize(true);
+      // mobile devices trigger resize when scrolling and address bar shows / hides
+      if (this.screenSize && (this.screenSize.width === newScreenSize.width)) {
+        return;
       }
+
+      requestAnimFrame(() => {
+        this.screenSize = newScreenSize;
+        const { canvas } = this;
+        const { width, height } = getScreenSize(true);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        canvas.width = width;
+        canvas.height = height;
+        if (this.particleArray.length) {
+          this.particleArray = this.particleArray.map((p) => p.onResize(canvas));
+        }
+      });
     },
-    frame() {
+    particleAnimationFrame() {
       if (Date.now() < (this.timeStamp + Math.floor(1000 / 60))) {
-        return window.requestAnimFrame(this.frame);
+        return requestAnimFrame(this.particleAnimationFrame);
       }
 
-      this.drawBackground(colorPalette.bg);
+      this.particleAnimationDrawBackground(colorPalette.bg);
       this.particleArray = this.particleArray.map((p) => p.updatePath());
       this.particleArray.forEach((p) => p.draw(this.context));
 
       this.timeStamp = Date.now();
-      return window.requestAnimFrame(this.frame);
+      return requestAnimFrame(this.particleAnimationFrame);
     },
     createParticles(amount = 0, x, y) {
       let numParticles = amount;
-      const { canvas, context } = this;
       while (numParticles > 0) {
-        this.particleArray.push(new Particle(x, y, canvas));
+        this.particleArray.push(
+          new Particle(x, y, this.canvas),
+        );
         numParticles -= 1;
       }
 
-      this.particleArray.forEach((p) => p.draw(context));
+      this.particleArray.forEach(
+        (p) => p.draw(this.context),
+      );
     },
-    drawBackground(color) {
+    particleAnimationDrawBackground(color) {
       const { context } = this;
       // eslint-disable-next-line no-param-reassign
       context.fillStyle = `rgb(${color.r}, ${color.g}, ${color.b})`;

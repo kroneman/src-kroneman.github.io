@@ -17,7 +17,7 @@ const listText = [
 
 const SECOND = 1000;
 const DURATION = 15 * SECOND;
-const { requestAnimFrame } = window;
+const { requestAnimFrame, cancelAnimFrame } = window;
 
 export default {
   props: {},
@@ -26,6 +26,7 @@ export default {
       currentPhaseIndex: 0,
       startedTimeStamp: null,
       screenSize: null,
+      introAnimationFrameSet: null,
     };
   },
   beforeDestroy() {
@@ -38,6 +39,23 @@ export default {
         window.addEventListener('resize', this.onIntroAnimationResize);
       });
     },
+    introSkipAnimation() {
+      const len = listText.length;
+      this.currentPhaseIndex = len - 1;
+      this.startedTimeStamp -= DURATION;
+    },
+    introReplayAnimation() {
+      this.canvas = this.$el.querySelector('.canvas');
+      this.context = this.canvas.getContext('2d');
+
+      this.isAnimationDone = false;
+      this.currentPhaseIndex = 0;
+      this.startedTimeStamp = Date.now();
+      this.timeStamp = this.startedTimeStamp;
+
+      this.introSetCanvasBounds();
+      this.introAnimationFrame();
+    },
     onIntroAnimationResize: debounce(function onIntroAnimationResize() {
       const newScreenSize = getScreenSize(true);
       // mobile devices trigger resize when scrolling and address bar shows / hides
@@ -46,15 +64,7 @@ export default {
       }
 
       this.screenSize = newScreenSize;
-      this.canvas = this.$el.querySelector('.canvas');
-      this.context = this.canvas.getContext('2d');
-
-      this.currentPhaseIndex = 0;
-      this.startedTimeStamp = Date.now();
-      this.timeStamp = this.startedTimeStamp;
-
-      this.introSetCanvasBounds();
-      this.introAnimationFrame();
+      this.introReplayAnimation();
     }),
     introSetCanvasBounds() {
       const {
@@ -73,19 +83,30 @@ export default {
       });
     },
     introAnimationFrame() {
-      if (Date.now() < (this.timeStamp + Math.floor(1000 / 60))) {
-        return requestAnimFrame(this.introAnimationFrame);
+      if (this.isAnimationDone) {
+        this.introAnimationFrameSet = cancelAnimFrame(this.introAnimationFrameSet);
+        return () => {};
+      }
+
+      if (Date.now() < (this.timeStamp + Math.floor(2000 / 15))) {
+        cancelAnimFrame(this.introAnimationFrameSet);
+        this.introAnimationFrameSet = requestAnimFrame(this.introAnimationFrame);
+        return this.introAnimationFrameSet;
       }
 
       this.introDraw();
 
       this.timeStamp = Date.now();
-      return requestAnimFrame(this.introAnimationFrame);
+      cancelAnimFrame(this.introAnimationFrameSet);
+      this.introAnimationFrameSet = requestAnimFrame(this.introAnimationFrame);
+      return this.introAnimationFrameSet;
     },
     introDraw() {
       const { width, height } = getScreenSize(true);
       const x = width / 2;
       const y = height / 2;
+
+      this.isAnimationDone = this.introAnimationIsDone();
 
       listText.forEach((text, i) => {
         if (i === 0) {
@@ -97,7 +118,7 @@ export default {
         this.setPhase(atTime, i);
       });
 
-      requestAnimationFrame(() => {
+      requestAnimFrame(() => {
         this.introDrawText({
           x,
           y,
@@ -136,6 +157,9 @@ export default {
         this.canvasOpacity = 0;
         this.currentPhaseIndex = index;
       }
+    },
+    introAnimationIsDone() {
+      return this.timePassed() > DURATION;
     },
   },
 };
