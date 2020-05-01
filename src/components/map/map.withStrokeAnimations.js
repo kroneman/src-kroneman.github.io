@@ -43,13 +43,11 @@ export default {
       return;
     }
 
-    // window.addEventListener('scroll', this.onScroll);
     this.onScroll();
   },
   methods: {
     onScroll() {
       this.hasSequenceStarted = true;
-      console.log(this.hasSequenceStarted);
       window.setTimeout(() => {
         this.animatepathsSequentially(this.itemsToAnimate);
       }, this.delayStart);
