@@ -11,10 +11,8 @@
 export function debounce(func, wait = 200, immediate = false) {
   let timeout;
 
-  return function executedFunction() {
+  return function executedFunction(...args) {
     const context = this;
-    // eslint-disable-next-line prefer-rest-params
-    const args = arguments;
     const later = function later() {
       timeout = null;
       if (!immediate) {
@@ -28,6 +26,27 @@ export function debounce(func, wait = 200, immediate = false) {
     timeout = setTimeout(later, wait);
 
     if (callNow) func.apply(context, args);
+  };
+}
+
+/**
+ * Credit: https://codeburst.io/throttling-and-debouncing-in-javascript-646d076d0a44
+ * Throttling function modified slightly from original using fn.apply to add context
+ * @param {Function} fn
+ * @param {Number} [delay] at which to throttle
+ */
+export function throttle(fn, delay = 100) {
+  const noop = () => {};
+  let lastCall = 0;
+  return function executionContext(...args) {
+    const context = this;
+    const now = Date.now();
+    if (now - lastCall < delay) {
+      return noop();
+    }
+    lastCall = now;
+    // apply doesn't work on arrow functions
+    return fn.apply(context, args);
   };
 }
 
