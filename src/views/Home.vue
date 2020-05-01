@@ -1,6 +1,10 @@
 <template>
   <div class="home">
 
+    <div id="Intro" class="home-section bg-grey-1 clr-background py-6" style="position: relative">
+      <animation-canvas animation-type="intro" />
+    </div>
+
     <div id="Projects" class="home-section pt-6 py-md-6 px-0">
       <div class="container d-flex align-items-center" style="overflow: hidden">
         <div class="row align-items-center">
@@ -99,6 +103,11 @@
       <div class="container d-flex align-items-center">
         <div class="d-block w-100">
           <div class="row align-items-center justify-content-center">
+            <div class="col-12 pb-4">
+              <div class="d-flex justify-content-center w-100">
+                <profile-image />
+              </div>
+            </div>
             <div class="col-12">
               <h2>{{homeData.connectHeader}}</h2>
               <p>{{homeData.connectMessage}}</p>
@@ -124,6 +133,7 @@ import Icon from '@/components/icon.vue';
 import linkCustom from '@/components/link-custom/link-custom.vue';
 import animationMap from '@/components/map/map.generated.vue';
 import animationCanvas from '@/components/animation-canvas/animation-canvas.vue';
+import profileImage from '@/components/profile-image/profile-image.vue';
 
 export default {
   name: 'Home',
@@ -132,6 +142,7 @@ export default {
     linkCustom,
     animationMap,
     animationCanvas,
+    profileImage,
   },
   computed: {
     homeData() {

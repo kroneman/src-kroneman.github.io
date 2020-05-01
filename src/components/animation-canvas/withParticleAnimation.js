@@ -1,4 +1,4 @@
-import './animationFrame.polyfill';
+import { throttle, isInViewport } from '@/utils';
 import Particle, { colorPalette } from './Particle';
 
 export default {
@@ -10,12 +10,14 @@ export default {
   },
   data() {
     return {
+      particleAnimationStarted: false,
       timeStamp: null,
       particleArray: [],
     };
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.setCanvasBounds);
+    window.removeEventListener('scroll', this.onScroll);
   },
   methods: {
     initParticleAnimation() {
@@ -24,12 +26,25 @@ export default {
 
       this.timeStamp = Date.now();
       this.canvasOpacity = 1;
-      this.setCanvasBounds();
-      window.addEventListener('resize', this.setCanvasBounds);
 
+      window.addEventListener('resize', this.setCanvasBounds);
+      window.addEventListener('scroll', this.onScroll);
+    },
+    onScroll: throttle(function onScroll() {
+      if (this.particleAnimationStarted) {
+        window.removeEventListener('scroll', this.onScroll);
+        return;
+      }
+
+      if (!isInViewport(this.$el, 500)) {
+        return;
+      }
+
+      this.particleAnimationStarted = true;
+      this.setCanvasBounds();
       this.frame();
       this.createParticles(this.particleNumber);
-    },
+    }, 100),
     setCanvasBounds() {
       const { canvas } = this;
       canvas.style.width = `${window.innerWidth}px`;

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { debounce, isInViewport } from '@/utils';
+import { debounce, throttle, isInViewport } from '@/utils';
 
 export default {
   name: 'Navigation',
@@ -84,7 +84,7 @@ export default {
       const originalTop = distanceToTop(anchorElement);
       window.scrollBy({ top: originalTop, left: 0, behavior: 'smooth' });
     },
-    onScroll() {
+    onScroll: throttle(function onScroll() {
       const updatedAnchorElements = this.navLinks.map((navLink) => {
         const isActive = navLink.anchorElement ? isInViewport(navLink.anchorElement, 500) : false;
         return {
@@ -94,7 +94,7 @@ export default {
       });
 
       this.navLinks = updatedAnchorElements;
-    },
+    }, 100),
     getAnchorElements(navLink) {
       const anchorElement = document.querySelector(navLink.anchor);
       return {

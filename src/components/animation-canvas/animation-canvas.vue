@@ -5,8 +5,10 @@
 </template>
 
 <script>
+import './animationFrame.polyfill';
 import withCircleAnimation from './withCircleAnimation';
 import withPaticleAnimation from './withParticleAnimation';
+import withIntroAnimation from './withIntroAnimation';
 
 export default {
   name: 'AnimationCanvas',
@@ -19,6 +21,7 @@ export default {
   mixins: [
     withCircleAnimation,
     withPaticleAnimation,
+    withIntroAnimation,
   ],
   data() {
     return {
@@ -28,12 +31,16 @@ export default {
     };
   },
   mounted() {
-    if (this.animationType.toLowerCase() === 'circle') {
-      this.initCircleAnimation();
-    }
+    const has = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
+    const variations = {
+      circle: this.initCircleAnimation,
+      particle: this.initParticleAnimation,
+      intro: this.introInitAnimation,
+    };
 
-    if (this.animationType.toLowerCase() === 'particle') {
-      this.initParticleAnimation();
+    const lowercaseAnimationtype = this.animationType.toLowerCase();
+    if (has(variations, lowercaseAnimationtype)) {
+      variations[lowercaseAnimationtype]();
     }
   },
 };

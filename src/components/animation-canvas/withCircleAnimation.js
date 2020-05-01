@@ -31,8 +31,14 @@ export default {
       });
     },
     onCircleAnimationResize: debounce(function onCircleAnimationResize() {
+      const newScreenSize = getScreenSize(true);
+      // mobile devices trigger resize when scrolling and address bar shows / hides
+      if (this.screenSize && (this.screenSize.width === newScreenSize.width)) {
+        return;
+      }
+
       this.canvasOpacity = 0.1;
-      this.screenSize = getScreenSize(true);
+      this.screenSize = newScreenSize;
       this.canvas = this.$el.querySelector('.canvas');
       this.context = this.canvas.getContext('2d');
       this.circleAnimationRadius = 8;

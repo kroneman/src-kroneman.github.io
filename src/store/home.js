@@ -17,7 +17,7 @@ export default {
         icon: 'google-app-script',
         title: 'Google apps script: localization',
         text:
-          'Scripts google\'s language app in google apps script to speed up setting up initial localization files',
+          'A script for Localization using google Translate Api and google Drive',
         link: 'https://github.com/kroneman/google-apps-script--app-localization',
         linkText: 'View Repository',
         linkExternal: true,
@@ -119,7 +119,7 @@ export default {
       },
     ],
     connectHeader: 'Get in touch',
-    connectMessage: 'I\'m open to new opportunities',
+    connectMessage: 'I\'m looking for new opportunities',
     connectLinks: [
       {
         link: 'https://github.com/kroneman',

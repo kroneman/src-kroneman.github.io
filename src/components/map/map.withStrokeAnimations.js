@@ -1,8 +1,12 @@
+import { throttle, isInViewport } from '@/utils';
+
 // https://codepen.io/MyXoToD/post/howto-self-drawing-svg-animation
 const vendorPrefix = ['webkit', 'moz', 'MS', 'o', ''];
 
+
 export default {
   data: () => ({
+    hasSequenceStarted: false,
     animationListeners: [],
     animationIndex: 0,
     animationMapClass: 'animated-map',
@@ -34,9 +38,20 @@ export default {
       return;
     }
 
-    this.animatepathsSequentially(this.itemsToAnimate);
+    window.addEventListener('scroll', this.onScroll);
   },
   methods: {
+    onScroll: throttle(function onScroll() {
+      if (this.hasSequenceStarted) {
+        window.removeEventListener('scroll', this.onScroll);
+        return;
+      }
+
+      if (isInViewport(this.$el)) {
+        this.hasSequenceStarted = true;
+        this.animatepathsSequentially(this.itemsToAnimate);
+      }
+    }, 100),
     animatepathsSequentially(pathsToAnimate) {
       if (this.animationIndex >= pathsToAnimate.length) {
         this.checkLoop();

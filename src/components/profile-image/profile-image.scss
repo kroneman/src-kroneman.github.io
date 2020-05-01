@@ -1,0 +1,35 @@
+@import '~@/style/variables.scss';
+
+$profile-image-offset: 20px 0 0 0 !default;
+$profile-image-size: 100% !default;
+
+.profile-image {
+    position: relative;
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 100%;
+    display: block;
+
+    @include respond(md) {
+        max-width: 320px;
+    }
+
+    &::after {
+        content: "";
+
+        // display flex can mess with aspect ratio of padding-bottom
+        display: block;
+        padding-bottom: 100%;
+    }
+
+    img {
+        width: $profile-image-size;
+        margin: $profile-image-offset;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
