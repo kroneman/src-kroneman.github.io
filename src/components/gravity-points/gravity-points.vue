@@ -173,7 +173,6 @@ export default {
     },
     resize() {
       const { canvas, bufferCvs } = this;
-      debugger;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
