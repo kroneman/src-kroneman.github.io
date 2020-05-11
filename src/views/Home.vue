@@ -72,8 +72,9 @@
     </div>
 
     <div id="Tech" class="home-section" style="position: relative">
-      <animation-canvas animation-type="particle" />
-      <div class="container d-flex align-items-center">
+      <!-- <animation-canvas animation-type="particle" /> -->
+      <gravity-points />
+      <div class="container d-flex align-items-center" style="z-index: 1">
         <div class="d-block w-100">
           <div class="row align-items-center">
             <div class="col-12 py-6">
@@ -141,6 +142,7 @@ import Icon from '@/components/icon.vue';
 import linkCustom from '@/components/link-custom/link-custom.vue';
 import animationMap from '@/components/map/map.generated.vue';
 import animationCanvas from '@/components/animation-canvas/animation-canvas.vue';
+import gravityPoints from '@/components/gravity-points/gravity-points.vue';
 import profileImage from '@/components/profile-image/profile-image.vue';
 import scrollContainer from '@/components/endless-horizontal-scroll/endless-horizontal-scroll.vue';
 
@@ -151,6 +153,7 @@ export default {
     linkCustom,
     animationMap,
     animationCanvas,
+    gravityPoints,
     profileImage,
     scrollContainer,
   },
