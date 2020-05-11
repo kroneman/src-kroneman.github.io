@@ -15,7 +15,7 @@
         left: 0;
     }
     100% { 
-        transform: translateX(-50%);
+        transform: translateX(-33.33%);
     }
 }
 
@@ -30,16 +30,18 @@
     }
 
     &-items {
-        animation: moveSlideshow 140s linear infinite;
+        animation: moveSlideshow 30s linear infinite;
         left: 0;
         top: 0;
         bottom: 0;
-        height: 100%;
-        width: auto;
+        height: auto;
+        width: 300%;
+        // width: auto;
         display: flex;
 
         > div {
             flex: 1 1 100%;
+            width: 100%;
         }
     }
 }

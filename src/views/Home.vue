@@ -95,6 +95,7 @@
       <scroll-container class="home-section_map-container py-6">
         <animation-map :animated-map="true" />
         <animation-map :animated-map="true" :delay-start="1000" />
+        <animation-map :animated-map="true" :delay-start="2000" />
       </scroll-container>
       <div class="container d-flex align-items-center">
         <div class="row px-4 align-items-center justify-content-center">
