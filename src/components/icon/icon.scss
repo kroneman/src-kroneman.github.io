@@ -1,0 +1,29 @@
+$icon-size: 20px;
+.icon {
+  min-width: $icon-size;
+  width: $icon-size;
+  max-width: $icon-size;
+  width: 100%;
+  height: auto;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.full-size {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  svg {
+    width: auto;
+    min-width: $icon-size;
+    display: block;
+  }
+
+  .stackoverflow {
+    min-width: $icon-size * 1.5;
+    max-width: $icon-size * 1.5;
+    margin: 0 -($icon-size - ($icon-size / 2));
+  }
+}

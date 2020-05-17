@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Icon from '@/components/icon.vue';
+import Icon from '@/components/icon/icon.vue';
 import linkCustom from '@/components/link-custom/link-custom.vue';
 
 export default {
