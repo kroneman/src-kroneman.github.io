@@ -1,0 +1,37 @@
+@import '~@/style/variables';
+
+.card {
+    // is actually the image container :(
+    &_image {
+      min-height: 45vh;
+      width: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+  
+      img {
+        height: 100%;
+        width: auto;
+        max-width: none;
+        position: absolute;
+      }
+    
+      @include respond(md) {
+        min-height: 200px; 
+  
+        img {
+          height: auto;
+          width: 100%;
+        }
+      }
+    }
+  
+    &_text {
+      @include respond(md) {
+        padding: 15px;
+      }
+    }
+  }
+  

@@ -1,62 +1,18 @@
 @import '~@/style/variables';
 
 .home-section {
+  $context-class: &;
   display: flex;
   min-height: 100vh;
-}
 
-.card {
-  // is actually the image container :(
-  &_image {
-    min-height: 45vh;
-    width: 100%;
+  &--about {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-
-    img {
-      height: 100%;
-      width: auto;
-      max-width: none;
-      position: absolute;
-    }
-
-    @include respond(md) {
-      min-height: 200px; 
-
-      img {
-        height: auto;
-        width: 100%;
-      }
-    }
-  }
-
-  &_text {
-    @include respond(md) {
-      padding: 15px;
-    }
-  }
-}
-
-.home-section--about {
-    position: relative;
-
-    .home-section_map-container {
+    #{$context-class}_map-container {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
     }
-
-    .home-section_map {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+  }
 }

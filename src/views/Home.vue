@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 
-    <div id="Intro" class="home-section bg-grey-1 clr-background py-6" style="position: relative">
+    <div id="Intro" class="home-section bg-grey-1 clr-background py-6 pos-r">
       <animation-canvas
         animation-type="intro"
         :with-skip-animation="true"
@@ -10,36 +10,29 @@
     </div>
 
     <div id="Projects" class="home-section pt-6 py-md-6 px-0">
-      <div class="container d-flex align-items-center" style="overflow: hidden">
+      <div class="container d-flex align-items-center ofl-h">
         <div class="row align-items-center">
           <div class="col-12">
             <h2 class="my-md-3 pb-md-4 py-md-4">{{homeData.introText}}</h2>
             <div class="row justify-content-center">
-              <div class="col-12 col-md-6 col-lg-4 px-md-4 pb-6" v-for="introItem in homeData.introItems" :key="introItem.title">
-                <div class="card_image">
-                  <img v-if="introItem.image" :src="introItem.image" />
-                  <icon v-if="introItem.icon" :name="introItem.icon" class="full-size" />
-                </div>
-                <div class="card_text p-4">
-                  <h4 class="my-1">{{introItem.title}}</h4>
-                  <p class="fs-16 fs-md-18">{{introItem.text}}</p>
-                  <link-custom class="fs-18" :href="introItem.link" :external="introItem.linkExternal">
-                    <span v-if="introItem.linkText">
-                      {{introItem.linkText}}
-                    </span>
-                    <span v-else>
-                      {{introItem.link}}
-                    </span>
-                  </link-custom>
-                </div>
-              </div>
+              <card
+                v-for="introItem in homeData.introItems" :key="introItem.title"
+                class="col-12 col-md-6 col-lg-4 px-md-4 pb-6"
+                :image="introItem.image"
+                :icon="introItem.icon"
+                :title="introItem.title"
+                :text="introItem.text"
+                :link="introItem.link"
+                :linkExternal="introItem.linkExternal"
+                :linkText="introItem.linkText"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div id="Experience" class="home-section bg-grey-1 clr-background py-6" style="position: relative">
+    <div id="Experience" class="home-section bg-grey-1 clr-background py-6 pos-r">
       <animation-canvas />
       <div class="container d-flex align-items-center">
         <div class="d-block w-100">
@@ -71,10 +64,10 @@
       </div>
     </div>
 
-    <div id="Tech" class="home-section" style="position: relative">
+    <div id="Tech" class="home-section pos-r">
       <!-- <animation-canvas animation-type="particle" /> -->
       <gravity-points />
-      <div class="container d-flex align-items-center" style="z-index: 1">
+      <div class="container d-flex align-items-center z-1">
         <div class="d-block w-100">
           <div class="row align-items-center">
             <div class="col-12 py-6">
@@ -139,24 +132,24 @@
 </template>
 
 <script>
-import Icon from '@/components/icon.vue';
 import linkCustom from '@/components/link-custom/link-custom.vue';
 import animationMap from '@/components/map/map.generated.vue';
 import animationCanvas from '@/components/animation-canvas/animation-canvas.vue';
 import gravityPoints from '@/components/gravity-points/gravity-points.vue';
 import profileImage from '@/components/profile-image/profile-image.vue';
 import scrollContainer from '@/components/endless-horizontal-scroll/endless-horizontal-scroll.vue';
+import card from '@/components/card/card.vue';
 
 export default {
   name: 'Home',
   components: {
-    Icon,
     linkCustom,
     animationMap,
     animationCanvas,
     gravityPoints,
     profileImage,
     scrollContainer,
+    card,
   },
   computed: {
     homeData() {
