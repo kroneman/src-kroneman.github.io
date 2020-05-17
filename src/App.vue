@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ofl-x-h">
     <Header />
     <div class="app-container">
       <router-view />

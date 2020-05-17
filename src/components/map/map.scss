@@ -14,21 +14,12 @@ $svg-stroke-animation-color: theme-color(primary) !default;
   svg {
     width: auto;
     height: 100%;
-
-    // @include respond(lg) {
-    //   width: 100%;
-    //   height: auto;
-    // }
   }
 
   text,
   .point {
     pointer-events: none;
     user-select: none;
-  }
-
-  path {
-    cursor: pointer;
   }
 }
 

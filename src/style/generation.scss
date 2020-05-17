@@ -1,4 +1,7 @@
 $property-generation-config: (
+    // ==================================
+    // Theme
+    // ==================================
     color: (
         property: 'color',
         namespace: 'clr',
@@ -14,16 +17,18 @@ $property-generation-config: (
         namespace: 'bg',
         values: $theme-colors
     ),
-    order: (
-        property: 'order',
-        namespace: 'o',
+    // ==================================
+    // Layout
+    // ==================================
+    position: (
+        property: 'position',
+        namespace: 'pos',
         values: (
-            0: 0,
-            1: 1,
-            2: 2,
-            3: 3,
-            4: 4,
-            5: 5,
+            s: static,
+            r: relative,
+            f: fixed,
+            a: absolute,
+            st: sticky,
         )
     ),
     display: (
@@ -37,6 +42,64 @@ $property-generation-config: (
             none: none,
         )
     ),
+    order: (
+        property: 'order',
+        namespace: 'o',
+        values: (
+            0: 0,
+            1: 1,
+            2: 2,
+            3: 3,
+            4: 4,
+            5: 5,
+        )
+    ),
+    'z-index': (
+        property: 'z-index',
+        namespace: 'z',
+        values: (
+            n1: -1,
+            0: 0,
+            1: 1,
+            10: 10,
+            50: 50,
+            100: 100,
+            1000: 1000 
+        )
+    ),
+    overflow: ( 
+        property: 'overflow',
+        namespace: 'ofl',
+        values: (
+            s: scroll,
+            h: hidden,
+            a: auto,
+            v: visible
+        )
+    ),
+    'overflow-x': (
+        property: 'overflow-x',
+        namespace: 'ofl-x',
+        values: (
+            s: scroll,
+            h: hidden,
+            a: auto,
+            v: visible
+        )
+    ),
+    'overflow-y': (
+        property: 'overflow-y',
+        namespace: 'ofl-y',
+        values: (
+            s: scroll,
+            h: hidden,
+            a: auto,
+            v: visible
+        )
+    ),
+    // ==================================
+    // Width
+    // ==================================
     width: (
         property: 'width',
         namespace: 'w',
@@ -61,6 +124,9 @@ $property-generation-config: (
             lg: 992px
         )
     ),
+    // ==================================
+    // Typography
+    // ==================================
     'text-alignment': (
         property: 'text-align',
         namespace: 'text',

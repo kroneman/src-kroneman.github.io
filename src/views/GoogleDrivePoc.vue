@@ -23,8 +23,11 @@ export default {
     }
 
     const { data } = await axios.get(VUE_APP_G_DOC_POC);
-    const { html } = data;
+    if (!data) {
+      return;
+    }
 
+    const { html } = data;
     if (!html) {
       return;
     }
