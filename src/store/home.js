@@ -119,7 +119,7 @@ export default {
       },
     ],
     connectHeader: 'Get in touch',
-    connectMessage: 'I\'m looking for new opportunities',
+    connectMessage: '',
     connectLinks: [
       {
         link: 'https://github.com/kroneman',

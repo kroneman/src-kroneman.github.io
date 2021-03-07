@@ -11,7 +11,7 @@ import GravityPoint from './GravityPoint';
 const config = {
   BACKGROUND_COLOR: 'rgba(255, 255, 255, 1)',
   PARTICLE_COLOR: 'rgba(52, 61, 70, .1)',
-  particleNum: 20,
+  particleNum: 150,
   PARTICLE_RADIUS: 1,
   G_POINT_RADIUS: 10,
 };
