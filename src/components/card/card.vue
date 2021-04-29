@@ -70,5 +70,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./Card";
+@import "./card";
 </style>
