@@ -19,4 +19,9 @@ jobs:
     - name: Run tests
       run: yarn build
     - name: Build to kroneman.github.io
+      env:
+        PAGES_DEPLOYMENT_EMAIL: ${{ secrets.PAGES_DEPLOYMENT_EMAIL }}
+        PAGES_DEPLOYMENT_NAME: ${{ secrets.PAGES_DEPLOYMENT_NAME }}
+        PAGES_DEPLOYMENT_TOKEN: ${{ secrets.PAGES_DEPLOYMENT_TOKEN }}
+        PAGES_DEPLOYMENT_USER: ${{ secrets.PAGES_DEPLOYMENT_USER }}
       run: ${GITHUB_WORKSPACE}/bin/deploy-v2
