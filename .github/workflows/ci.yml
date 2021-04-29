@@ -18,3 +18,5 @@ jobs:
       run: yarn
     - name: Run tests
       run: yarn build
+    - name: Build to kroneman.github.io
+      run: ${GITHUB_WORKSPACE}/bin/deploy-v2
