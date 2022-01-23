@@ -1,0 +1,54 @@
+{
+  "name": "kroneman.io",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "map-download": "bin/map-tools.js --download",
+    "map-build": "bin/map-tools.js --build",
+    "map-update": "bin/map-tools.js --download --build",
+    "deploy": "npm run build && ./bin/deploy-kroneman-io"
+  },
+  "dependencies": {
+    "@turf/turf": "^5.1.6",
+    "axios": "^0.21.1",
+    "core-js": "^3.6.4",
+    "dotenv": "^8.2.0",
+    "epsg-index": "^1.0.0",
+    "fs-extra": "^9.0.0",
+    "proj4": "^2.6.1",
+    "vue": "^2.6.11",
+    "vue-analytics": "^5.22.1",
+    "vue-router": "^3.1.6",
+    "vuex": "^3.1.3"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-plugin-eslint": "~4.3.0",
+    "@vue/cli-plugin-router": "~4.3.0",
+    "@vue/cli-plugin-vuex": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "geojson-to-svg": "git://github.com/kroneman/geojson2svg.git#src-kroneman.io",
+    "lint-staged": "^9.5.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^8.0.2",
+    "vue-svg-loader": "^0.16.0",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
+}
