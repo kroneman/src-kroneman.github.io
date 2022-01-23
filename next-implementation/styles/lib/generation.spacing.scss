@@ -1,0 +1,80 @@
+$breakpoints: () !default; // should match respond mixin
+$directions: (
+    t: top,
+    r: right,
+    b: bottom,
+    l: left,
+    x: (left, right),
+    y: (top, bottom)
+) !default;
+$spacing-config: (
+    property: 'padding',
+    namespace: 'p',
+    values: (
+        0: 0,
+        1: 5px,
+        2: 10px,
+        4: 20px,
+        5: 30px,
+        6: 40px,
+        auto: auto
+    )
+) !default;
+
+/// Generate A property for a single breakpoint or default
+/// @param {string} $property ['padding'] 
+/// @param {string} $namespace ['p'] 
+/// @param {map} $values [(n: 'none')] 
+/// @param {string} $property-breakpoint [null] 
+@mixin generate-spacing(
+    $property: 'padding',
+    $namespace: 'p',
+    $values: (0: 0, auto: auto),
+    $property-breakpoint: null
+) {
+    $breakpoint-modifier: '';
+    // if there is a breakpoint add it here with an additional -
+    @if $property-breakpoint {
+        $breakpoint-modifier: '#{$property-breakpoint}-';
+    }
+
+    @each $property-modifier, $property-value in $values {
+        .#{$namespace}-#{$breakpoint-modifier}#{$property-modifier} {
+            #{$property}: $property-value;
+        }
+    }
+
+    @each $direction-key, $direction-value in $directions {
+        @each $property-modifier, $property-value in $values {
+            .#{$namespace}#{$direction-key}-#{$breakpoint-modifier}#{$property-modifier} {
+                @if type-of($direction-value) == list {
+                    @each $list-item in $direction-value {
+                        #{$property}-#{$list-item}: $property-value;
+                    }
+                } @else if type-of($direction-value) == string {
+                    #{$property}-#{$direction-value}: $property-value;
+                }
+                
+            }
+        }
+    }
+}
+
+/// Generate A property for all defined breakpoints
+/// @param {string} $property ['display'] 
+/// @param {string} $namespace ['d'] 
+/// @param {map} $values [(n: 'none')] 
+/// @param {map} $grid-breakpoints-map [( xs: 120px, sm: 200px, xl: 1200px)] 
+@mixin generate-spacing-all-breakpoints(
+    $property: 'padding',
+    $namespace: 'p',
+    $values: (0: 0, auto: auto),
+    $grid-breakpoints-map: $breakpoints
+) {
+    @include generate-spacing($property, $namespace, $values);
+    @each $key, $breakpointWidth in $grid-breakpoints-map {
+        @include respond($key) {
+            @include generate-spacing($property, $namespace, $values, $key);
+        }
+    }
+}

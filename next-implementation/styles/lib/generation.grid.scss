@@ -1,0 +1,112 @@
+$grid-config: (
+    rows: (
+        namespace: 'row'
+    ),
+    columns: (
+        namespace: 'col',
+        max: 12,
+    ),
+    gutters: (
+        default: 24px
+        // make consistent with $breakpoints
+    ),
+    alignment: (
+        vertical: (
+            namespace: justify-content,
+            property: justify-content,
+            values: (
+                left: flex-start,
+                center: center,
+                right: flex-end
+            )
+        ),
+        horizontal: (
+            namespace: align-items,
+            property: align-items,
+            values: (
+                top: flex-start,
+                center: center,
+                end: flex-end
+            )
+        )
+    ),
+    // things like order or flex-shrink / grow values
+    properties: ()
+) !default;
+
+/// !!depends on generate-property mixin
+///
+/// @param {map} $rows (namespace: 'row')
+/// @param {map} $columns (namespace: 'col',max: 12)
+/// @param {map} $gutters (default: 24px) // add values using breakpoint keys
+/// @param {map} $alignment (vertical: (), horizontal: ()) // each matching schema for generate-property mixin
+/// @param {map} $properties ('flex-grow': (property: 'flex-grow', namespace: 'flex-grow', values: (0: 0, 1: 1)) // each matching schema for generate-property mixin
+/// @param {string} $breakpoint-key [null] 
+@mixin generate-grid($rows, $columns, $gutters, $alignment, $properties, $breakpoint-key: null) {
+    $gutter-value: if(
+        map_has_key($gutters, $breakpoint-key),
+        map_get($gutters, $breakpoint-key),
+        map_get($gutters, 'default')
+    );
+    $breakpoint-class-space: '';
+    @if $breakpoint-key != null {
+        $breakpoint-class-space: '-#{$breakpoint-key}';
+    }
+
+    // Create the wrapping row
+    $margin-value: $gutter-value / 2;
+    $row-namespace: map-get($rows, 'namespace');
+    .#{$row-namespace}#{$breakpoint-class-space} {
+        margin-left: -$margin-value;
+        margin-right: -$margin-value;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+    }
+
+    // Create sets of columns
+    $column-namespace: map-get($columns, 'namespace');
+    $number-of-columns: map-get($columns, 'max');
+    @for $i from 1 through $number-of-columns {
+        $percent-width: ($i / $number-of-columns * 100 + '%');
+        .#{$column-namespace}#{$breakpoint-class-space}-#{$i} {
+            padding-left: $margin-value;
+            padding-right: $margin-value;
+            flex: 0 0 #{$percent-width};
+            max-width: #{$percent-width};
+
+        }
+    }
+
+    .#{$column-namespace}#{$breakpoint-class-space} {
+        padding-left: $margin-value;
+        padding-right: $margin-value;
+        flex: 1;
+    }
+
+    $alignment-vertical: map-get($alignment, 'vertical');
+    $alignment-horizontal: map-get($alignment, 'horizontal');
+    @include generate-property($alignment-vertical..., $property-breakpoint: $breakpoint-key);
+    @include generate-property($alignment-horizontal..., $property-breakpoint: $breakpoint-key);
+
+    @each $property-key, $property-value in $properties {
+        @include generate-property($property-value..., $property-breakpoint: $breakpoint-key);
+    }
+}
+
+/// !!depends on generate-property mixin
+///
+/// @param {map} $rows (namespace: 'row')
+/// @param {map} $columns (namespace: 'col',max: 12)
+/// @param {map} $gutters (default: 24px) // add values using breakpoint keys
+/// @param {map} $alignment (vertical: (), horizontal: ()) // each matching schema for generate-property mixin
+/// @param {map} $properties ('flex-grow': (property: 'flex-grow', namespace: 'flex-grow', values: (0: 0, 1: 1)) // each matching schema for generate-property mixin
+/// @param {string} $grid-breakpoints-map [null] 
+@mixin generate-grid-all-breakpoints($rows, $columns, $gutters, $alignment, $properties, $grid-breakpoints-map: $breakpoints) {
+    @include generate-grid($rows, $columns, $gutters, $alignment, $properties);
+    @each $key, $breakpointWidth in $grid-breakpoints-map {
+        @include respond($key) {
+            @include generate-grid($rows, $columns, $gutters, $alignment, $properties, $key);
+        }
+    }
+}

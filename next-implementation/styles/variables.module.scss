@@ -1,0 +1,112 @@
+@import "lib";
+
+// ============
+// Responsive / Layout
+// ============
+$breakpoints: (
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+);
+
+$max-widths: (
+        lg: 992px
+);
+
+// ============
+// Typography
+// ============
+$fonts-location: '../../public/assets/fonts/';
+$font-import: (
+        'hind_siliguri/hindsiliguri': (
+                regular: (weight: normal, style: normal)
+        ),
+        'josefin_slab/josefinslab': (
+                regular: (weight: normal, style: normal)
+        ),
+        'raleway/raleway': (
+                regular: (weight: normal, style: normal)
+        )
+);
+
+$font-family: (
+        primary: 'hind_siliguri/hindsiliguri', // body
+        secondary: 'raleway/raleway', // alt headings
+        tertiary: 'josephin_slab/josefinslab' // primary headings
+);
+
+$font-types: (
+        primary: (
+                default: (font-family: primary, font-size: 1em, line-height: normal, letter-spacing: normal)
+        ),
+
+  // default body text
+        default: (font: 400 16px/1.5 font-family(secondary), letter-spacing: normal),
+        small: type-10,
+
+        type-1: (font: 700 30px font-family(tertiary), letter-spacing: normal, line-height: normal),
+        type-2: (font: 700 28px font-family(tertiary), letter-spacing: normal, line-height: normal),
+        type-3: (font: 700 26px font-family(tertiary), letter-spacing: normal, line-height: normal),
+        type-4: (font: 700 24px font-family(tertiary), letter-spacing: -.5px, line-height: normal),
+        type-5: (font: 700 22px font-family(secondary), letter-spacing: normal, line-height: normal),
+        type-6: (font: 700 20px font-family(secondary), letter-spacing: normal, line-height: normal),
+        type-7: (font: 700 18px/1.5 font-family(secondary), letter-spacing: normal),
+        type-8: (font: 400 16px/1.5 font-family(secondary), letter-spacing: normal),
+        type-9: (font: 400 18px/1.5 font-family(primary), letter-spacing: normal),
+        type-10: (font: 400 16px/1.5 font-family(primary), letter-spacing: normal),
+        type-11: (font: 400 16px/1.5 font-family(secondary), letter-spacing: normal),
+        type-12: (font: 400 14px/1.5 font-family(secondary), letter-spacing: normal),
+
+  // default headings
+        title-h1: (default: type-2, md: type-1),
+        title-h2: (default: type-4, md: type-3),
+        title-h3: (default: type-6, md: type-5),
+        title-h4: (default: type-8, md: type-7),
+        title-h5: (default: type-10, md: type-9),
+        title-h6: (default: type-12, md: type-11),
+
+        header-title: (type: type-6, text-transform: none),
+);
+
+// ============
+// Colors
+// ============
+
+// Usage: color(default), color(background);
+$colors: (
+        default: #444,  // text
+        background: #fff, // page background
+
+  // https://www.color-hex.com/color-palette/2280
+        grey-1: #343d46,
+        grey-2: #4f5b66,
+        grey-3: #65737e,
+        grey-4: #a7adba,
+        grey-5: #c0c5ce
+);
+
+// Usage: theme-color(primary)
+$theme-colors: (
+        primary: #ff7433,
+
+        header-background: color(grey-1),
+        default-text-color: color(default),
+        alt-text: color(background),
+
+  // https://www.color-hex.com/color-palette/2280
+        grey-1: #343d46,
+        grey-2: #4f5b66,
+        grey-3: #65737e,
+        grey-4: #a7adba,
+        grey-5: rgba(#c0c5ce, 0.2)
+);
+
+$color-primary: #343d46;
+$color-primary-alt: #ffffff;
+
+
+:export {
+  colorPrimary: $color-primary;
+  colorPrimaryAlt: $color-primary-alt;
+}

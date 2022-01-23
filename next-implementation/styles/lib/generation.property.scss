@@ -1,0 +1,48 @@
+$breakpoints: () !default;  // should match respond mixin
+
+/// Generate A property for a single breakpoint or default
+/// @param {string} $property ['display'] 
+/// @param {string} $namespace ['d'] 
+/// @param {map} $values [(n: 'none')] 
+/// @param {string} $property-breakpoint [null] 
+@mixin generate-property(
+  $property: 'display',
+  $namespace: 'd',
+  $values: ('n': none), 
+  $property-breakpoint: null
+) {
+  $breakpoint-modifier: '';
+
+  // if there is a breakpoint add it here with an additional -
+  @if $property-breakpoint {
+    $breakpoint-modifier: '#{$property-breakpoint}-';
+  }
+
+  @each $property-modifier, $property-value in $values {
+    .#{$namespace}-#{$breakpoint-modifier}#{$property-modifier} {
+      #{$property}: $property-value;
+    }
+  }
+}
+
+/// Generate A property for all defined breakpoints
+/// @param {string} $property ['display'] 
+/// @param {string} $namespace ['d'] 
+/// @param {map} $values [(n: 'none')] 
+/// @param {map} $grid-breakpoints-map [( xs: 120px, sm: 200px, xl: 1200px)] 
+@mixin generate-property-all-breakpoints(
+  $property: 'display',
+  $namespace: 'd',
+  $values: ('n': none),
+  $grid-breakpoints-map: $breakpoints
+) {
+  // generate default
+  @include generate-property($property, $namespace, $values);
+  @each $key, $breakpointWidth in $grid-breakpoints-map {
+      @include respond($key) {
+          @include generate-property($property, $namespace, $values, $key);
+      }
+  }
+}
+
+

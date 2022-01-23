@@ -1,0 +1,63 @@
+@import 'styles/variables.module.scss';
+
+$icon-height: 42px;
+$x-offset: 9px;
+
+.drawer_icon {
+  $context-class: &;
+  position: absolute;
+  left: 0;
+  width: 50px;
+  height: $icon-height;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+
+  &_container {
+    position: relative;
+  }
+
+  &_line {
+    width: 100%;
+    content: '';
+    display: block;
+    height: 2px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: calc(#{$icon-height} / 6);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @include respond(lg) {
+    display: none;
+  }
+
+  // https://codepen.io/RRoberts/pen/ZBYaJr
+  &.is_active {
+    transition: all 0.3s ease-in-out;
+    transition-delay: 0.6s;
+    transform: rotate(45deg);
+
+    #{$context-class}_line:nth-child(2) {
+      width: 0;
+    }
+
+    #{$context-class}_line:nth-child(1),
+    #{$context-class}_line:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+
+    #{$context-class}_line:nth-child(1) {
+      transform: translateY($x-offset);
+    }
+
+    #{$context-class}_line:nth-child(3) {
+      transform: translateY(-$x-offset) rotate(90deg);
+    }
+  }
+}

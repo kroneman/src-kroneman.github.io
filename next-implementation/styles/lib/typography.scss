@@ -1,0 +1,126 @@
+/// Font Imports
+$font-import: (
+    TradeGothicLT: (
+        regular: (weight: 400, style: normal),
+        bold: (weight: 700, style: normal)
+    )
+) !default;
+
+
+/// Font Family Names
+ $font-family: (
+    primary: (lato, "Times New Roman", Times, serif)
+) !default;
+
+/// Font Map
+/// Mapping of all the fonts used
+$font-types: (
+    primary: (
+        default: (font-family: primary, font-size: 1em, line-height: normal, letter-spacing: normal)
+    ),
+    type-1: (font: 700 30px font-family(primary), letter-spacing: normal, line-height: normal),
+    type-2: (font: 700 28px font-family(primary), letter-spacing: normal, line-height: normal),
+    type-3: (font: 700 26px font-family(primary), letter-spacing: normal, line-height: normal),
+    type-4: (font: 700 24px font-family(primary), letter-spacing: -.5px, line-height: normal),
+    type-5: (font: 700 22px font-family(primary), letter-spacing: normal, line-height: normal),
+    type-6: (font: 700 20px font-family(primary), letter-spacing: normal, line-height: normal),
+    type-7: (font: 700 18px/1.5 font-family(primary), letter-spacing: normal),
+    type-8: (font: 400 16px/1.5 font-family(primary), letter-spacing: normal),
+    type-9: (font: 400 14px/1.5 font-family(primary), letter-spacing: normal),
+    type-10: (font: 400 12px/1.5 font-family(primary), letter-spacing: normal),
+    type-11: (font: 400 10px/1.5 font-family(primary), letter-spacing: normal),
+    type-12: (font: 400 8px/1.5 font-family(primary), letter-spacing: normal),
+
+    // default body text
+    default: type-8,
+    small: type-10,
+
+    // default headings
+    title-h1: (default: type-2, tablet-landscape: type-1),
+    title-h2: (default: type-3, tablet-landscape: type-2),
+    title-h3: (default: type-4, tablet-landscape: type-3),
+    title-h4: (default: type-5, tablet-landscape: type-4),
+    title-h5: (default: type-6, tablet-landscape: type-5),
+    title-h6: (default: type-7, tablet-landscape: type-6),
+) !default;
+
+/// Return a font-family.
+/// @param {string} $name The font family name
+@function font-family($name: primary) {
+   @if map_has_key($font-family, $name) {
+       @return map_get($font-family, $name);
+   } @else {
+       @return map_get($font-family, primary);
+   }
+}
+
+/// Return a font face import
+/// @param {string} $font The font name
+/// @param {string} $filename The file name
+/// @param {number} $font-weight The font weight
+/// @param {string} $font-style The font style
+@mixin font-import($font, $filename, $font-weight: 400, $font-style: normal) {
+   @font-face {
+       font-family: $font;
+       font-style: $font-style;
+       font-weight: $font-weight;
+       font-display: swap;
+       src: url('#{$filename}.woff2') format('woff2'), url('#{$filename}.woff') format('woff');
+   }
+}
+
+/// Return a font-type styling with responsive mapping.
+/// @param {string} $name The font type styling
+@mixin font-type($name: default) {
+   $map: if(map_has_key($font-types, $name), map_get($font-types, $name), null);
+
+   @if type-of($map) == map and map_has_key($map, default) {
+       @each $respond, $style in $map {
+           @if $respond == default {
+               @include font-style($style);
+           } @else {
+               @include respond($respond) {
+                   @include font-style($style);
+               }
+           }
+       }
+    } @else if type-of($map) == string {
+        @include font-type($map);
+    } @else if type-of($map) == map {
+        @include font-style($map);
+    }
+}
+
+/// Return a font-type styling.
+/// @param {map|string} $map The font mapping
+@mixin font-style($map: ()) {
+    @if type-of($map) == map {
+        @each $type, $value in $map {
+            @if $type == type {
+                @include font-type($value);
+            } @else {
+                #{$type}: $value;
+            }
+        }
+    } @else if type-of($map) == string {
+        @include font-type($map);
+    } @else {
+        font: $map;
+    }
+}
+
+/// Loads all the font-faces for the fonts
+/// @param {string} $fonts-location the fonts file location
+@mixin import-fonts($fonts-location: '../fonts/') {
+    @debug $fonts-location;
+    @each $font, $settings in $font-import {
+        @each $name, $format in $settings {
+            @include font-import(
+                $font, 
+                '#{$fonts-location}#{to-lower-case($font)}-#{to-lower-case($name)}',
+                map_get($format, 'weight'),
+                map_get($format, 'style')
+            );
+        }
+    }
+}

@@ -1,0 +1,6 @@
+$default-text-color: theme-color(default-text-color) !default;
+
+html, body {
+    @include font-type(default);
+    color: $default-text-color;
+}

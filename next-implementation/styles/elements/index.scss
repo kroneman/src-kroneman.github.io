@@ -1,0 +1,10 @@
+@import 'headings';
+@import 'layout';
+@import 'links';
+@import 'lists';
+@import 'typography';
+@import 'images';
+
+*:focus {
+    outline-color: theme-color(primary);
+}

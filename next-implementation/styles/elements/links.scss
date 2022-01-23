@@ -1,0 +1,14 @@
+a {
+    transition: color 200ms ease-in-out;
+
+    &,
+    &:active,
+    &:focus,
+    &:visited {
+        color: theme-color(default-text-color);
+    }
+
+    &:hover {
+        color: theme-color(primary)
+    }
+}

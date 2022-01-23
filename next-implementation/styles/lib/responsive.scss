@@ -1,0 +1,49 @@
+$responsive-include: 0 !default;
+$responsive-include-count: $responsive-include + 1;
+
+
+$breakpoints: (
+  //   xxxs: 375px,
+  //   xxs: 425px,
+  //   xs: 480px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  //   xxl: 1440px,
+  //   xxxl: 1920px
+) !default;
+
+/// Return media query around given content.
+/// @param {string} $type The breakpoint name
+@mixin respond($type: xl) {
+  @if map-has-key($breakpoints, $type) {
+    @media only screen and (min-width: map_get($breakpoints, $type)) {
+      @content;
+    }
+  }
+}
+
+/// Return media query around given content.
+/// @param {string} $type The breakpoint name
+@mixin respond-max($type: desktop) {
+  @if map-has-key($breakpoints, $type) {
+    @media only screen and (max-width: map_get($breakpoints, $type) - 1px) {
+      @content;
+    }
+  }
+}
+
+/// Return media query around given content.
+@mixin respond-print() {
+  @media print {
+    @content;
+  }
+}
+
+/// Return media query for IE browsers.
+@mixin respond-IE() {
+  @media all and (-ms-high-contrast: none) {
+    @content;
+  }
+}
