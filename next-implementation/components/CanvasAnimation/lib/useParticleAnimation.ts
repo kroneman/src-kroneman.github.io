@@ -121,7 +121,7 @@ function useParticleAnimation(props: UseParticleAnimationProps) {
     createParticles(particleNumber);
   }, 100)
 
-  const init = () => {
+  const init = (callback: () => void) => {
     if(!canvasRef.current) {
       return;
     }
@@ -134,6 +134,7 @@ function useParticleAnimation(props: UseParticleAnimationProps) {
 
     window.addEventListener('resize', setParticleCanvasBounds);
     window.addEventListener('scroll', scrollHandler);
+    callback();
   }
 
   const cleanup = () => {

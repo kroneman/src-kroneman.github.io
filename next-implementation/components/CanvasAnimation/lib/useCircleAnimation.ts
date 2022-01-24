@@ -19,7 +19,6 @@ function useCircleAnimation(props: UseCircleAnimationProps) {
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const screenSize = useRef<IScreenSize | undefined>();
   const deviceRatio = useRef<number>();
-  const canvasOpacity = useRef(0);
   const circleAnimationRef = useRef<number>();
   const circleAnimationRadius = useRef(0);
 
@@ -72,7 +71,6 @@ function useCircleAnimation(props: UseCircleAnimationProps) {
       }
 
       circleAnimationRef.current = undefined;
-      canvasOpacity.current = 0.1;
     }
   }
 
@@ -97,7 +95,6 @@ function useCircleAnimation(props: UseCircleAnimationProps) {
       return;
     }
 
-    canvasOpacity.current = 0.1;
     screenSize.current = newScreenSize;
     context.current = canvas.current.getContext('2d');
 
@@ -115,10 +112,11 @@ function useCircleAnimation(props: UseCircleAnimationProps) {
     window.removeEventListener('resize', onResize);
   }
 
-  const init = () => {
+  const init = (callback: () => void) => {
     deviceRatio.current = getDevicePixelRatio();
     onResize();
     window.addEventListener('resize', onResize);
+    callback();
   }
 
   return {
