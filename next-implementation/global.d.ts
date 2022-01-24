@@ -1,4 +1,8 @@
 
 interface Window {
-  ga: any
+  ga: any,
+  requestAnimFrame: any;
+  mozCancelAnimationFrame: any;
+  mozRequestAnimationFrame: any;
+  webkitRequestAnimationFrame: any
 }

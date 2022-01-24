@@ -1,0 +1,30 @@
+@import 'styles/variables.module.scss';
+
+.canvas_animation {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1500ms ease-in-out;
+
+  z-index: 0;
+  & + * {
+    z-index: 1;
+  }
+
+  &_canvas {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  &_button {
+    position: absolute;
+    color: #fff;
+    right: 0;
+    left: auto;
+    bottom: 0;
+    transform: translateY(-50%);
+  }
+}

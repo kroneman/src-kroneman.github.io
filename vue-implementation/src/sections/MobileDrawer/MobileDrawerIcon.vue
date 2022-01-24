@@ -71,7 +71,7 @@ $x-offset: 9px;
     transform: rotate(45deg);
 
     .line:nth-child(2) {
-      width: 0px;
+      width: 0;
     }
 
     .line:nth-child(1),
