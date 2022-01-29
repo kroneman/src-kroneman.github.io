@@ -1,0 +1,18 @@
+@import 'styles/variables.module.scss';
+
+$profile-image-offset: 20px 0 0 0 !default;
+$profile-image-size: 100% !default;
+
+.profileImage {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  //max-width: 200px;
+  overflow: hidden;
+  border-radius: 100%;
+
+  img {
+    width: $profile-image-size;
+    margin-top: -25px !important;
+  }
+}

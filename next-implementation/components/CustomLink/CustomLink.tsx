@@ -9,7 +9,7 @@ type CustomLinkProps = {
   eventCategory?: string;
   eventAction?: string;
   children: React.ReactNode | React.ReactNode[],
-  className: string
+  className?: string
 }
 
 const CustomLink = (props: CustomLinkProps) => {

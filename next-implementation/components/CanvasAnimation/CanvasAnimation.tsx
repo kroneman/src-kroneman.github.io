@@ -4,12 +4,6 @@ import styles from './CanvasAnimation.module.scss';
 import useCircleAnimation from "./lib/useCircleAnimation";
 import useIntroAnimation from "./lib/useIntroAnimation";
 
-type CanvasAnimationProps = {
-  animationType: string;
-  withSkipAnimation: boolean;
-  withReplayAnimation: boolean;
-}
-
 type CanvasAnimationState = {
   buttonText: {
     skip: string,
@@ -24,6 +18,12 @@ type VariationType = {
     cleanup: () => void,
     opacity: number
   }
+}
+
+type CanvasAnimationProps = {
+  animationType?: string;
+  withSkipAnimation?: boolean;
+  withReplayAnimation?: boolean;
 }
 
 const CanvasAnimation = (props: CanvasAnimationProps) => {
