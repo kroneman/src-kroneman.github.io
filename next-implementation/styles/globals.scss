@@ -1,3 +1,5 @@
+@tailwind base;
+
 @import './lib';
 @import './variables.module.scss';
 
@@ -14,11 +16,11 @@
   width: 100%;
   overflow-x: hidden;
 
-@include respond(lg) {
-  max-width: 1440px;
-}
+  @include respond(lg) {
+    max-width: 1440px;
+  }
 }
 
-@tailwind base;
+
 @tailwind components;
 @tailwind utilities;

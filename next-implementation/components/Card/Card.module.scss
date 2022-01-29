@@ -1,0 +1,29 @@
+@import 'styles/variables.module.scss';
+
+.card {
+  font-size: inherit;
+
+  &_icon {
+    max-width: initial;
+    width: initial;
+  }
+
+  &_image {
+    min-height: 45vh;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    @include respond(md) {
+      min-height: 233px;
+    }
+  }
+
+  &_text {
+    @include respond(md) {
+      padding: 15px;
+    }
+  }
+}

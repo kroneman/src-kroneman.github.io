@@ -44,7 +44,6 @@ const Navigation = (props: NavigationProps) => {
 
   const getAnchorElements = (navLinkMap: INavLink) => {
     const anchorElement = document.querySelector(navLinkMap.anchor);
-    debugger
     return {
       ...navLinkMap,
       anchorElement,
