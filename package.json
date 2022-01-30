@@ -8,7 +8,13 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "dotenv": "^14.2.0"
+    "@turf/turf": "^5.1.6",
+    "axios": "^0.25.0",
+    "dotenv": "^14.2.0",
+    "fs-extra": "^10.0.0",
+    "geojson-to-svg": "git://github.com/kroneman/geojson2svg.git#src-kroneman.io",
+    "proj4": "^2.7.5",
+    "epsg-index": "^1.0.0"
   },
   "scripts": {
     "next:start": "cd next-implementation && yarn start",
@@ -17,7 +23,10 @@
     "next:install": "cd next-implementation && yarn install",
     "vue:install": "cd vue-implementation && yarn install",
     "vue:build": "cd vue-implementation && yarn build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "map-download": "bin/map-tools.js --download",
+    "map-build": "bin/map-tools.js --build",
+    "map-update": "bin/map-tools.js --download --build"
   },
   "repository": {
     "type": "git",

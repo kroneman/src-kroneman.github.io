@@ -1,9 +1,6 @@
 import React from 'react';
 import type {NextPage} from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 
-import variables from '../styles/variables.module.scss';
 import Header from '../sections/Header/index';
 import CanvasAnimation from "../components/CanvasAnimation";
 import Card from '../components/Card';
@@ -12,7 +9,8 @@ import homeData from '../data/home';
 
 import styles from './index.module.scss';
 import CustomLink from "../components/CustomLink";
-import home from "../data/home";
+import AnimatedMap from "../components/AnimatedMap";
+import EndlessScrollContainer from "../components/EndlessScrollContainer";
 
 const Home: NextPage = () => {
 
@@ -55,7 +53,7 @@ const Home: NextPage = () => {
 
           <div id="Experience"
                className={`${styles.home_section} bg-primary text-primaryAlt py-6 relative`}>
-            <CanvasAnimation/>
+            {/*<CanvasAnimation/>*/}
             <div className="container flex items-center">
               <div className="block w-full">
                 <div className="px-1 flex flex-wrap overflow-hidden align-items-center">
@@ -108,12 +106,12 @@ const Home: NextPage = () => {
           </div>
 
           <div id="About"
-               className={`${styles.home_section} bg-grey-5 py-6 home-section--about text-center`}>
-            {/*<scroll-container class="home-section_map-container py-6">*/}
-            {/*  <animation-map :animated-map="true" />*/}
-            {/*  <animation-map :animated-map="true" :delay-start="1000" />*/}
-            {/*  <animation-map :animated-map="true" :delay-start="2000" />*/}
-            {/*</scroll-container>*/}
+               className={`${styles.home_section} bg-primary text-primaryAlt home-section--about text-center relative py-6`}>
+            <EndlessScrollContainer className={`${styles.home_section_mapContainer} my-6`}>
+              <AnimatedMap/>
+              <AnimatedMap/>
+              <AnimatedMap/>
+            </EndlessScrollContainer>
             <div className="container flex items-center">
               <div className="row flex px-4 items-center justify-center">
                 <div className="basis-full md:basis-10/12 lg:basis-8/12 xl:basis-6/12 py-6 px-6">
@@ -133,7 +131,7 @@ const Home: NextPage = () => {
                   <div className="basis-full pb-4">
                     <div className="flex justify-center w-full">
                       {/*<profile-image />*/}
-                      <ProfileImage />
+                      <ProfileImage/>
                     </div>
                   </div>
                   <div className="basis-full">

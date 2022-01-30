@@ -1,0 +1,27 @@
+@import 'styles/variables.module.scss';
+
+$map-background: transparent !default;
+$svg-stroke-animation-color: theme-color(primary) !default;
+
+.WorldMap {
+  z-index: -1;
+  background: $map-background;
+  height: 100%;
+  width: auto;
+  overflow: hidden;
+  left: 0;
+  color: $svg-stroke-animation-color;
+
+  svg {
+    width: auto;
+    height: 100%;
+    opacity: 1;
+    shape-rendering: optimizeSpeed;
+  }
+
+  text,
+  .point {
+    pointer-events: none;
+    user-select: none;
+  }
+}

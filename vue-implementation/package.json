@@ -6,14 +6,13 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "map-download": "bin/map-tools.js --download",
-    "map-build": "bin/map-tools.js --build",
-    "map-update": "bin/map-tools.js --download --build",
+    "map-download": "../bin/map-tools.js --download",
+    "map-build": "../bin/map-tools.js --build",
+    "map-update": "../bin/map-tools.js --download --build",
     "deploy": "npm run build && ./bin/deploy-kroneman-io"
   },
   "dependencies": {
     "@turf/turf": "^5.1.6",
-    "axios": "^0.21.1",
     "core-js": "^3.6.4",
     "dotenv": "^8.2.0",
     "epsg-index": "^1.0.0",

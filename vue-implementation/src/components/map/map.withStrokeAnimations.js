@@ -3,7 +3,6 @@
 // https://codepen.io/MyXoToD/post/howto-self-drawing-svg-animation
 const vendorPrefix = ['webkit', 'moz', 'MS', 'o', ''];
 
-
 export default {
   props: {
     delayStart: {

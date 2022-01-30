@@ -1,7 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import useParticleAnimation from "./lib/useParticleAnimation";
 import styles from './CanvasAnimation.module.scss';
-import useCircleAnimation from "./lib/useCircleAnimation";
 import useIntroAnimation from "./lib/useIntroAnimation";
 
 type CanvasAnimationState = {
@@ -47,28 +45,15 @@ const CanvasAnimation = (props: CanvasAnimationProps) => {
   const isShowSkipButton = withSkipAnimation && !animationState.isAnimationDone;
 
   const canvasRef = useRef(null);
-  const { init: circleAnimationInit, cleanup: circleAnimationCleanup } = useCircleAnimation({ canvasRef });
-  const { init: particleAnimationInit, cleanup: particleAnimationCleanup } = useParticleAnimation({ canvasRef });
   const { init: introInit, cleanup: introCleanup } = useIntroAnimation({ canvasRef });
 
   const getVariation = () => {
     const variations: VariationType = {
-      circle: {
-        init: circleAnimationInit,
-        cleanup: circleAnimationCleanup,
-        opacity: 0.1
-      },
-      particle: {
-        init: particleAnimationInit,
-        cleanup: particleAnimationCleanup,
-        opacity: 1
-      },
       intro: {
         init: introInit,
         cleanup: introCleanup,
         opacity: 1
       },
-      // intro: this.introInitAnimation,
       default: {
         init: () => {},
         cleanup: () => {},
@@ -89,7 +74,6 @@ const CanvasAnimation = (props: CanvasAnimationProps) => {
     init(() => {
       setCanvasOpacity(opacity);
     });
-
 
     return () => {
       cleanup();

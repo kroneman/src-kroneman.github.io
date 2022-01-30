@@ -43,7 +43,6 @@ const Header = (props: HeaderProps) => {
             </h1>
             <Drawer isOpen={drawerOpen}>
               <Navigation onNavigate={onNavigate} />
-              {/*<navigation @trigger="onNavigate" />*/}
               <div className="block md:hidden flex content-center py-4 md:py-0 relative">
                 <span className="mobile-line"/>
                 <SocialList className="pt-5"/>

@@ -26,7 +26,6 @@ const IconMap = {
     return <Stackoverflow {...otherProps} className={`${className} ${styles.stackoverflow}`} />
   },
   googleappsscript(props: React.ComponentProps<any>) {
-    debugger
     return <GoogleAppsScript {...props} />
   },
   lionlogo(props: React.ComponentProps<any>) {
