@@ -3,12 +3,14 @@ import styles from './Drawer.module.scss';
 
 type DrawerProps = {
   isOpen: boolean;
-  children?: React.ReactNode | React.ReactNode[]
+  children?: React.ReactNode | React.ReactNode[],
+  className?: string
 }
 
 const Drawer = (props: DrawerProps) => {
-  const { children, isOpen } = props;
+  const { children, isOpen, className } = props;
   const wrapperStyles = [
+    className,
     styles.mobile_drawer,
     isOpen ? styles.is_open : null
   ].filter(Boolean).join(' ')

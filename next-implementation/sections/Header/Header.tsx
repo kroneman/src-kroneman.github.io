@@ -9,7 +9,7 @@ import Navigation from '../Navigation';
 import styles from './Header.module.scss';
 
 // Constants
-const title = '@kroneman';
+const title = 'Lennart Kroneman';
 
 type HeaderProps = {
   isDrawerOpen: boolean;
@@ -17,7 +17,7 @@ type HeaderProps = {
 
 const Header = (props: HeaderProps) => {
   const {isDrawerOpen = true} = props;
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(true);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(isDrawerOpen);
   const onDrawerIconClick = () => {
     setDrawerOpen(!drawerOpen)
   };
@@ -29,19 +29,22 @@ const Header = (props: HeaderProps) => {
   return (
     <header className={`${styles.header} px-4`}>
       <div className="flex items-center">
-        <div className="basis-full md:basis-6/12 lg:basis-9/12 xl:basis-6/12 flex-grow">
+        <div className="basis-full md:basis-6/12 lg:basis-10/12 xl:basis-6/12 flex-grow">
           <div
             className="flex items-center justify-center md:justify-start relative">
             <DrawerIcon onClick={onDrawerIconClick} isActive={drawerOpen} />
-            <h1 className={`p-0 m-0 py-2 md:pl-5 lg:pl-0 ${styles.header_title}`}>
-              <div className="flex items-center">
+
+            <h1 className={`grow shrink-0 p-0 m-0 py-4 md:pl-5 lg:pl-0 ${styles.header_title}`}>
+              {/*<div className="flex items-center">*/}
                 {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                <a href="/" className={styles.header_title_link}>
+              <a href="/" className={`${styles.header_title_link}`}>
                   {title}
-                </a>
-              </div>
+
+              {/*</div>*/}
+              </a>
             </h1>
-            <Drawer isOpen={drawerOpen}>
+
+            <Drawer isOpen={drawerOpen} >
               <Navigation onNavigate={onNavigate} />
               <div className="block md:hidden flex content-center py-4 md:py-0 relative">
                 <span className="mobile-line"/>

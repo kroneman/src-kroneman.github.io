@@ -1,14 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './CanvasAnimation.module.scss';
 import useIntroAnimation from "./lib/useIntroAnimation";
-
-type CanvasAnimationState = {
-  buttonText: {
-    skip: string,
-    repeat: string,
-  },
-  isAnimationDone: boolean,
-}
+import CustomButton from "../CustomButton";
 
 type VariationType = {
   [index: string]: {
@@ -32,20 +25,40 @@ const CanvasAnimation = (props: CanvasAnimationProps) => {
   } = props;
 
   const [canvasOpacity, setCanvasOpacity] = useState(0);
-  const [animationState, setAnimationState] = useState<CanvasAnimationState>({
-    buttonText: {
-      skip: 'Skip Sequence',
-      repeat: 'Replay Sequence',
-    },
-    isAnimationDone: false,
-  });
+  const [isAnimationDone, setIsAnimationDone] = useState(false);
+  const buttonText = {
+    skip: 'Skip Sequence',
+    repeat: 'Replay Sequence',
+  };
 
   const lowercaseAnimationType = animationType.toLowerCase();
-  const isShowRepeatButton = withReplayAnimation && animationState.isAnimationDone;
-  const isShowSkipButton = withSkipAnimation && !animationState.isAnimationDone;
+  const isShowRepeatButton = withReplayAnimation && isAnimationDone;
+  const isShowSkipButton = withSkipAnimation && !isAnimationDone;
 
   const canvasRef = useRef(null);
-  const { init: introInit, cleanup: introCleanup } = useIntroAnimation({ canvasRef });
+  const onAnimationDone = () => {
+    setIsAnimationDone(true);
+  }
+
+  const onAnimationResize = () => {
+    setIsAnimationDone(false);
+  }
+
+  const {init: introInit, cleanup: introCleanup, skip: introSkip, restart: introRestart} = useIntroAnimation({
+    canvasRef,
+    onDone: onAnimationDone,
+    onResize: onAnimationResize
+  });
+
+  const skip = () => {
+    introSkip();
+    setIsAnimationDone(true);
+  }
+
+  const restart = () => {
+    introRestart();
+    setIsAnimationDone(false);
+  }
 
   const getVariation = () => {
     const variations: VariationType = {
@@ -55,8 +68,10 @@ const CanvasAnimation = (props: CanvasAnimationProps) => {
         opacity: 1
       },
       default: {
-        init: () => {},
-        cleanup: () => {},
+        init: () => {
+        },
+        cleanup: () => {
+        },
         opacity: 0.1
       }
     };
@@ -66,8 +81,8 @@ const CanvasAnimation = (props: CanvasAnimationProps) => {
 
 
   useEffect(() => {
-    const { init, cleanup, opacity } = getVariation();
-    if(!init) {
+    const {init, cleanup, opacity} = getVariation();
+    if (!init) {
       return;
     }
 
@@ -81,8 +96,18 @@ const CanvasAnimation = (props: CanvasAnimationProps) => {
   }, []);
 
   return (
-    <div className={styles.canvas_animation} style={{ opacity: canvasOpacity }}>
-      <canvas className={styles.canvas_animation_canvas} ref={canvasRef} />
+    <div className={styles.canvas_animation} style={{opacity: canvasOpacity}}>
+      <canvas className={styles.canvas_animation_canvas} ref={canvasRef}/>
+      {isShowSkipButton ? (
+        <CustomButton className={`${styles.canvas_animation_button} mr-4`} onClick={skip}>
+          {buttonText.skip}
+        </CustomButton>
+      ) : null}
+      {isShowRepeatButton ? (
+        <CustomButton className={`${styles.canvas_animation_button} mr-4`} onClick={restart}>
+          {buttonText.repeat}
+        </CustomButton>
+        ) : null}
     </div>
   );
 }

@@ -25,11 +25,13 @@ const listText = [
 ];
 
 type UseIntroAnimationProps = {
-  canvasRef: any
+  canvasRef: any,
+  onDone: () => void,
+  onResize: () => void
 }
 
 function useIntroAnimation(props: UseIntroAnimationProps) {
-  const {canvasRef} = props
+  const {canvasRef, onDone, onResize} = props
   const canvas = canvasRef;
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const screenSize = useRef<IScreenSize | undefined>();
@@ -90,6 +92,9 @@ function useIntroAnimation(props: UseIntroAnimationProps) {
     const y = height / 2;
 
     isAnimationDone.current = introAnimationIsDone();
+    if(isAnimationDone.current) {
+      onDone();
+    }
 
     listText.forEach((text, i) => {
       if (i === 0) {
@@ -154,7 +159,7 @@ function useIntroAnimation(props: UseIntroAnimationProps) {
     introAnimationFrame();
   }
 
-  const onResize = debounce(function onIntroAnimationResize() {
+  const onAnimationResize = debounce(function onIntroAnimationResize() {
     const newScreenSize = getScreenSize(true) as IScreenSize;
 
     // mobile devices trigger resize when scrolling and address bar shows / hides
@@ -162,18 +167,19 @@ function useIntroAnimation(props: UseIntroAnimationProps) {
       return;
     }
 
+    onResize();
     screenSize.current = newScreenSize;
     introReplayAnimation();
   })
 
   const init = (callback: () => void) => {
-    onResize();
-    window.addEventListener('resize', onResize);
+    onAnimationResize();
+    window.addEventListener('resize', onAnimationResize);
     callback();
   }
 
   const cleanup = () => {
-    window.removeEventListener('resize', onResize);
+    window.removeEventListener('resize', onAnimationResize);
   }
 
   return {
